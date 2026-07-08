@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Salvicare Capsule — Moringa + Mangosteen Natural Food Supplement</title>
+<meta name="description" content="Salvicare Capsule — Moringa Oleifera with Garcinia Mangostana. Natural plant-based food supplement for daily wellness. FDA Registered PH FR-4000010419296."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --ink:#12241A; --green:#1A3D1B; --green-mid:#2D6A2F; --gold:#8B7335;
+    --paper:#FBFAF6; --white:#fff; --line:rgba(18,36,26,.14); --gray:#5B6B5D;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Open Sans',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,56px);}
+  .rule{border-top:1px solid var(--line);}
+  sup.ast{font-size:.6rem;color:var(--gold);font-weight:700;}
+
+  /* ── TOPLINE ── */
+  .topline{background:var(--green);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;letter-spacing:.3px;padding:9px 0;}
+  .topline .wrap{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
+  .topline em{color:#A8D5A2;font-style:normal;font-weight:800;}
+
+  /* ── NAV ── */
+  nav{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:99;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px;}
+  .nav-logo img{height:26px;object-fit:contain;}
+  .nav-links{display:flex;align-items:center;gap:36px;}
+  .nav-links a{font-size:.82rem;font-weight:600;color:var(--ink);}
+  .nav-links a:hover{color:var(--green-mid);}
+  .nav-cta{background:var(--green);color:var(--white)!important;padding:10px 22px;font-weight:700!important;}
+  .nav-cta:hover{background:var(--gold);}
+  #hamburger{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;}
+  #hamburger span{display:block;width:22px;height:2px;background:var(--ink);}
+  .mobile-nav{display:none;flex-direction:column;background:var(--white);border-top:1px solid var(--line);padding:8px clamp(20px,5vw,56px) 20px;}
+  .mobile-nav a{font-size:.85rem;font-weight:600;padding:12px 0;border-bottom:1px solid var(--line);}
+  @media(max-width:800px){.nav-links{display:none;}#hamburger{display:flex;}.mobile-nav.open{display:flex;}}
+
+  /* ── HERO ── F-pattern, left-aligned, flat ground */
+  .hero{padding:clamp(48px,8vw,96px) 0 clamp(40px,6vw,72px);}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:start;}
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+  h1{font-size:clamp(2.6rem,6vw,4.4rem);font-weight:900;line-height:1.02;letter-spacing:-1.5px;color:var(--green);margin-bottom:6px;}
+  h1 .accent{color:var(--gold);}
+  .hero-tag{font-size:.95rem;font-weight:600;color:var(--gray);letter-spacing:.3px;margin-bottom:22px;}
+  .hero-hook{font-size:clamp(1.1rem,2vw,1.35rem);font-weight:700;color:var(--ink);line-height:1.5;margin-bottom:16px;max-width:560px;}
+  .hero-hook em{color:var(--green-mid);font-style:normal;}
+  .hero-sub{font-size:.94rem;color:var(--gray);line-height:1.8;margin-bottom:24px;max-width:520px;}
+  .natc-inline{font-size:.7rem;font-weight:700;letter-spacing:.4px;color:var(--gray);text-transform:uppercase;margin-bottom:24px;}
+  .hero-price-row{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap;}
+  .hero-price{font-size:2.6rem;font-weight:900;color:var(--green);}
+  .hero-price-note{font-size:.8rem;color:var(--gray);}
+  .hero-sulit{font-size:.82rem;font-weight:700;color:var(--gold);margin-bottom:28px;}
+  .cta-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:28px;}
+  .btn-primary{background:var(--green);color:var(--white);font-family:'Montserrat',sans-serif;font-size:1rem;font-weight:800;padding:17px 38px;transition:background .2s;}
+  .btn-primary:hover{background:var(--gold);}
+  .link-secondary{font-size:.85rem;font-weight:700;color:var(--green-mid);border-bottom:2px solid var(--green-mid);padding-bottom:2px;}
+  .trust-line{display:flex;gap:20px;flex-wrap:wrap;font-size:.76rem;font-weight:600;color:var(--gray);}
+  .trust-line span{color:var(--green-mid);font-weight:800;margin-right:4px;}
+
+  .hero-photo{border:1px solid var(--line);background:var(--white);padding:28px;}
+  .hero-photo img{width:100%;max-width:280px;margin:0 auto;}
+  .hero-caption{font-size:.74rem;color:var(--gray);border-top:1px solid var(--line);margin-top:20px;padding-top:14px;line-height:1.6;}
+
+  /* ── PROOF STRIP ── */
+  .proof-strip{background:var(--ink);color:rgba(255,255,255,.85);}
+  .proof-strip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:16px clamp(20px,5vw,56px);}
+  .proof-strip strong{color:#A8D5A2;}
+  .proof-pay{display:flex;gap:16px;flex-wrap:wrap;font-size:.76rem;font-weight:700;}
+
+  /* ── STATS ── */
+  .stats .wrap{display:flex;flex-wrap:wrap;padding:32px clamp(20px,5vw,56px);}
+  .stat{flex:1;min-width:130px;text-align:left;padding:0 24px;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat-num{font-size:1.9rem;font-weight:900;color:var(--green);line-height:1;margin-bottom:6px;}
+  .stat-label{font-size:.68rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;}
+  .footnote{font-size:.68rem;color:var(--gray);padding:0 clamp(20px,5vw,56px) 24px;max-width:900px;}
+
+  /* ── SECTION COMMON ── */
+  .section{padding:clamp(56px,8vw,104px) 0;}
+  .section-head{margin-bottom:44px;max-width:680px;}
+  .sec-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:900;color:var(--green);line-height:1.15;letter-spacing:-.5px;}
+  .sec-title span{color:var(--gold);}
+  .sec-sub{font-size:.94rem;color:var(--gray);line-height:1.8;margin-top:14px;}
+
+  /* ── PROBLEM: numbered list, no cards ── */
+  .problem-layout{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;}
+  .prob-list{display:flex;flex-direction:column;}
+  .prob-row{display:grid;grid-template-columns:52px 1fr;gap:18px;padding:24px 0;border-top:1px solid var(--line);}
+  .prob-row:last-child{border-bottom:1px solid var(--line);}
+  .prob-n{font-size:1.6rem;font-weight:900;color:var(--line);}
+  .prob-row h4{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:6px;}
+  .prob-row p{font-size:.86rem;color:var(--gray);line-height:1.75;}
+  .problem-cta{background:var(--green);color:var(--white);padding:36px 30px;align-self:start;}
+  .problem-cta h3{font-size:1.25rem;font-weight:900;line-height:1.4;margin-bottom:14px;}
+  .problem-cta h3 span{color:#A8D5A2;}
+  .problem-cta p{font-size:.84rem;color:rgba(255,255,255,.8);line-height:1.75;margin-bottom:22px;}
+  .btn-on-dark{background:var(--gold);color:var(--white);font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:800;padding:13px 26px;display:inline-block;}
+  @media(max-width:760px){.problem-layout{grid-template-columns:1fr;}}
+
+  /* ── COMPARE TABLE ── */
+  .compare-wrap{overflow-x:auto;}
+  table.compare{width:100%;border-collapse:collapse;font-size:.86rem;min-width:520px;}
+  table.compare th{font-family:'Montserrat',sans-serif;font-size:.78rem;font-weight:800;text-align:left;padding:14px 18px;border-bottom:2px solid var(--ink);}
+  table.compare th.salvicare-h{color:var(--green);}
+  table.compare th.regular-h{color:var(--gray);}
+  table.compare td{padding:13px 18px;border-bottom:1px solid var(--line);}
+  table.compare td:first-child{color:var(--gray);font-weight:600;}
+  .yes{color:var(--green-mid);font-weight:800;}
+  .no{color:#B23A2E;font-weight:800;}
+
+  /* ── PLACEHOLDER QUOTE ── */
+
+  /* ── HOW IT WORKS: numbered row ── */
+  .how-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:8px;}
+  .how-cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 22px;}
+  .how-n{font-size:.75rem;font-weight:800;color:var(--gold);margin-bottom:14px;}
+  .how-cell h3{font-size:.92rem;font-weight:800;color:var(--ink);margin-bottom:8px;}
+  .how-cell p{font-size:.82rem;color:var(--gray);line-height:1.7;}
+  @media(max-width:800px){.how-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.how-grid{grid-template-columns:1fr;}}
+
+  /* ── INGREDIENTS: 2col divided ── */
+  .ing-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);}
+  .ing-col{padding:32px 32px 0 0;border-right:1px solid var(--line);}
+  .ing-col:last-child{border-right:none;padding-left:32px;padding-right:0;}
+  .ing-col h3{font-size:1.05rem;font-weight:800;color:var(--green);margin-bottom:4px;}
+  .ing-col .ing-sub{font-size:.78rem;color:var(--gray);margin-bottom:18px;}
+  .ing-col ul{list-style:none;}
+  .ing-col li{display:grid;grid-template-columns:18px 1fr;gap:10px;font-size:.86rem;color:var(--gray);line-height:1.7;padding:9px 0;border-top:1px solid var(--line);}
+  .ing-col li:first-of-type{border-top:none;}
+  .chk{color:var(--green-mid);font-weight:800;}
+  @media(max-width:760px){.ing-grid{grid-template-columns:1fr;}.ing-col{border-right:none;padding:0 0 24px;}.ing-col:last-child{padding-left:0;border-top:1px solid var(--line);padding-top:24px;}}
+
+  /* ── BENEFITS: single-column numbered spec list ── */
+  .ben-list{border-top:1px solid var(--line);}
+  .ben-row{display:grid;grid-template-columns:60px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);}
+  .ben-n{font-size:.78rem;font-weight:800;color:var(--gold);}
+  .ben-row h4{font-size:.95rem;font-weight:800;color:var(--ink);margin-bottom:4px;}
+  .ben-row p{font-size:.85rem;color:var(--gray);line-height:1.7;}
+
+  /* ── WELLNESS: 3-col divided ── */
+  .well-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:8px;}
+  .well-col{padding:26px 26px 0 0;border-right:1px solid var(--line);}
+  .well-col:last-child{border-right:none;padding-right:0;}
+  .well-col:not(:first-child){padding-left:26px;}
+  .well-col h4{font-size:.92rem;font-weight:800;color:var(--ink);margin:10px 0 8px;}
+  .well-col p{font-size:.84rem;color:var(--gray);line-height:1.7;}
+  .well-strip{display:flex;flex-wrap:wrap;gap:24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--line);font-size:.8rem;font-weight:700;color:var(--ink);}
+  .well-strip span{color:var(--green-mid);margin-right:6px;}
+  .well-note{font-size:.7rem;color:var(--gray);margin-top:24px;font-style:italic;}
+  @media(max-width:760px){.well-grid{grid-template-columns:1fr;}.well-col{border-right:none;padding:20px 0 0!important;border-top:1px solid var(--line);}.well-col:first-child{border-top:none;}}
+
+  /* ── NATC BAR ── */
+  .natc-bar{background:#FFF7E6;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);padding:20px 0;font-size:.8rem;line-height:1.85;color:#5A4A1F;}
+
+  /* ── DOSAGE ── */
+  .dosage{background:var(--green);color:var(--white);}
+  .dosage .sec-title{color:var(--white);}
+  .dosage .eyebrow{color:rgba(255,255,255,.6);}
+  .dose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:8px;border-top:1px solid rgba(255,255,255,.2);}
+  .dose-cell{padding:26px 26px 26px 0;border-right:1px solid rgba(255,255,255,.2);}
+  .dose-cell:last-child{border-right:none;padding-right:0;}
+  .dose-cell:not(:first-child){padding-left:26px;}
+  .dose-n{font-size:.75rem;font-weight:800;color:#A8D5A2;margin-bottom:12px;}
+  .dose-cell h3{font-size:.95rem;font-weight:800;margin-bottom:8px;}
+  .dose-cell p{font-size:.84rem;color:rgba(255,255,255,.8);line-height:1.7;}
+  .dose-note{background:rgba(0,0,0,.2);padding:18px 22px;margin-top:32px;font-size:.78rem;color:rgba(255,255,255,.85);line-height:1.85;}
+  @media(max-width:760px){.dose-grid{grid-template-columns:1fr;}.dose-cell{border-right:none!important;padding:20px 0!important;border-top:1px solid rgba(255,255,255,.2);}.dose-cell:first-child{border-top:none;}}
+
+  /* ── TESTIMONIALS ── */
+
+  /* ── BUNDLE PRICING: equal weight, typographic label ── */
+  .bundle-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);margin-top:8px;}
+  .bundle-col{padding:36px 30px;border-right:1px solid var(--line);}
+  .bundle-col:last-child{border-right:none;}
+  .most-chosen{font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .bundle-tag{font-size:.7rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+  .bundle-name{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:14px;}
+  .bundle-price{font-size:2.1rem;font-weight:900;color:var(--green);}
+  .bundle-price-note{font-size:.76rem;color:var(--gray);margin:4px 0 12px;}
+  .bundle-save{font-size:.78rem;font-weight:800;color:var(--gold);margin-bottom:18px;}
+  .bundle-perks{list-style:none;margin-bottom:24px;}
+  .bundle-perks li{font-size:.82rem;color:var(--gray);padding:6px 0;border-top:1px solid var(--line);}
+  .bundle-perks li:first-child{border-top:none;}
+  .bundle-perks .pk{color:var(--green-mid);font-weight:800;margin-right:6px;}
+  .bundle-btn{display:block;text-align:center;background:var(--green);color:var(--white);font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:800;padding:14px;}
+  .bundle-btn:hover{background:var(--gold);}
+  .bundle-note{font-size:.78rem;color:var(--gray);margin-top:20px;}
+  .sulit{border-top:1px solid var(--line);margin-top:32px;padding-top:24px;}
+  .sb-label{font-size:.72rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+  .sb-main{font-size:1.4rem;font-weight:900;color:var(--green);margin-bottom:4px;}
+  .sb-sub{font-size:.8rem;color:var(--gray);}
+  @media(max-width:760px){.bundle-grid{grid-template-columns:1fr;}.bundle-col{border-right:none;border-bottom:1px solid var(--line);}.bundle-col:last-child{border-bottom:none;}}
+
+  /* ── GUARANTEE ── */
+  .guarantee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .guarantee-layout{display:grid;grid-template-columns:180px 1fr;gap:40px;align-items:center;}
+  .g-num-block{font-size:4rem;font-weight:900;color:var(--green);line-height:.85;}
+  .g-num-block span{display:block;font-size:.7rem;font-weight:700;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+  .guarantee h2{font-size:1.5rem;font-weight:900;color:var(--ink);margin-bottom:10px;}
+  .guarantee p{font-size:.88rem;color:var(--gray);line-height:1.8;margin-bottom:18px;max-width:640px;}
+  .g-terms{display:flex;flex-wrap:wrap;gap:20px;font-size:.78rem;font-weight:700;color:var(--ink);}
+  .g-terms span{color:var(--green-mid);margin-right:5px;}
+  @media(max-width:600px){.guarantee-layout{grid-template-columns:1fr;}}
+
+  /* ── LEAD ── */
+  .lead .wrap{max-width:600px;}
+  .lead h2{font-size:1.4rem;font-weight:900;color:var(--ink);margin-bottom:10px;}
+  .lead h2 span{color:var(--green-mid);}
+  .lead p{font-size:.85rem;color:var(--gray);margin-bottom:20px;line-height:1.7;}
+  .lead-form{display:flex;gap:0;max-width:460px;border:1px solid var(--ink);}
+  .lead-form input{flex:1;padding:14px 16px;border:none;font-size:.85rem;outline:none;font-family:'Open Sans',sans-serif;}
+  .lead-form button{background:var(--ink);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:800;font-size:.82rem;padding:14px 22px;border:none;cursor:pointer;}
+  .lead-note{font-size:.72rem;color:var(--gray);margin-top:12px;}
+
+  /* ── FAQ (accordion — allowed) ── */
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 0;font-family:'Montserrat',sans-serif;font-size:.92rem;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:16px;}
+  .faq-icon{color:var(--green-mid);flex-shrink:0;transition:transform .25s;}
+  .faq-q.open .faq-icon{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;font-size:.85rem;color:var(--gray);line-height:1.8;transition:max-height .3s ease;}
+  .faq-a.open{max-height:280px;padding-bottom:20px;}
+
+  /* ── FINAL CTA ── */
+  .final-cta{background:var(--ink);color:var(--white);}
+  .final-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;}
+  .final-layout h2{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;line-height:1.3;margin-bottom:14px;}
+  .final-layout h2 span{color:#A8D5A2;}
+  .final-layout p{font-size:.88rem;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:20px;max-width:480px;}
+  .final-trust{display:flex;flex-wrap:wrap;gap:16px;font-size:.74rem;font-weight:700;color:rgba(255,255,255,.7);}
+  .final-trust span{color:#A8D5A2;margin-right:5px;}
+  .channels{display:flex;flex-direction:column;}
+  .ch-link{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid rgba(255,255,255,.15);font-family:'Montserrat',sans-serif;font-size:.88rem;font-weight:700;}
+  .ch-link:last-child{border-bottom:1px solid rgba(255,255,255,.15);}
+  @media(max-width:760px){.final-layout{grid-template-columns:1fr;}}
+
+  /* ── FDA SECTION: document style ── */
+  .fda-doc{border:1px solid var(--line);padding:clamp(28px,4vw,44px);max-width:760px;}
+  .fda-tag{display:inline-block;background:var(--green);color:var(--white);font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;margin-bottom:16px;}
+  .fda-regnum{font-size:1.4rem;font-weight:900;color:var(--ink);margin-bottom:6px;}
+  .fda-note{font-size:.82rem;color:var(--gray);margin-bottom:20px;}
+  .fda-dates{display:flex;gap:40px;margin-bottom:22px;flex-wrap:wrap;}
+  .fda-d-label{font-size:.68rem;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+  .fda-d-val{font-size:.92rem;font-weight:800;color:var(--ink);}
+  .fda-full{font-size:.82rem;color:var(--ink);line-height:1.9;border-top:1px solid var(--line);padding-top:20px;}
+
+  /* ── FOOTER ── */
+  footer{background:var(--green);color:rgba(255,255,255,.85);}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;padding:56px 0 32px;}
+  .f-logo img{height:32px;background:#fff;padding:5px 12px;margin-bottom:12px;}
+  .f-tagline{font-size:.8rem;color:rgba(255,255,255,.6);margin-bottom:16px;}
+  .f-company{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.85;}
+  .f-company strong{color:#fff;}
+  .f-col h4{font-size:.72rem;font-weight:800;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;}
+  .f-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:9px;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding:24px 0;font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.9;}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr;gap:28px;}}
+
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;}.hero-photo{max-width:340px;}}
+</style>
+</head>
+<body>
+
+<div class="topline"><div class="wrap">🌿 <em>Free Shipping</em> on 2+ bottles &nbsp;·&nbsp; COD Available Nationwide &nbsp;·&nbsp; FDA Registered PH <em>FR-4000010419296</em></div></div>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="nav-logo"><img src="salvicare-logo.svg" alt="Salvicare"/></a>
+    <div class="nav-links">
+      <a href="#why">Why Salvicare</a>
+      <a href="#ingredients">Ingredients</a>
+      <a href="#bundle">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#bundle" class="nav-cta">Order Now →</a>
+    </div>
+    <button id="hamburger" onclick="toggleNav()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#why" onclick="closeNav()">Why Salvicare</a>
+    <a href="#ingredients" onclick="closeNav()">Ingredients</a>
+    <a href="#bundle" onclick="closeNav()">Pricing</a>
+    <a href="#faq" onclick="closeNav()">FAQ</a>
+    <a href="#bundle" onclick="closeNav()">Order Now →</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <div class="eyebrow">Premium Natural Supplement</div>
+      <h1><span class="accent">SALVI</span>CARE</h1>
+      <p class="hero-tag">Moringa + Mangosteen · Daily Wellness</p>
+      <p class="hero-hook">Your body knows these two plants.<br/><em>It's been asking for them your whole life.</em></p>
+      <p class="hero-sub">Moringa Oleifera with Garcinia Mangostana (from the rind). Naturally rich in plant nutrients and antioxidants — rooted in Filipino tradition, made for everyday wellness.*</p>
+      <p class="natc-inline">Food/Dietary Supplement · No Approved Therapeutic Claims</p>
+      <div class="hero-price-row"><div class="hero-price">₱1,322</div><div class="hero-price-note">per bottle · 60 capsules · 2-month supply</div></div>
+      <div class="hero-sulit">💡 Sulit ba? Only ₱22 per day — less than a coffee.</div>
+      <div class="cta-row">
+        <a href="#bundle" class="btn-primary">Order Now →</a>
+        <a href="#why" class="link-secondary">See how it works ↓</a>
+      </div>
+      <div class="trust-line">
+        <div><span>✓</span>COD Available</div>
+        <div><span>✓</span>GCash Accepted</div>
+        <div><span>✓</span>60-Day Guarantee</div>
+        <div><span>✓</span>Free Shipping 2+ bottles</div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="salvicare-bottle.png" alt="Salvicare Capsule Bottle — Moringa Oleifera with Garcinia Mangostana, 60 Capsules"/>
+      <div class="hero-caption">Moringa Oleifera · Garcinia Mangostana (from the rind) · 60 capsules, 400mg each · FDA Registered PH FR-4000010419296</div>
+    </div>
+  </div>
+</section>
+
+<div class="proof-strip">
+  <div class="wrap">
+    <div><strong>FDA Registered</strong> — Food Supplement, No Approved Therapeutic Claims</div>
+    <div class="proof-pay">
+      <span>Cash on Delivery</span><span>GCash</span><span>Bank Transfer</span>
+    </div>
+  </div>
+</div>
+
+<div class="stats rule">
+  <div class="wrap">
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">Plant-Based Ingredients</div></div>
+    <div class="stat"><div class="stat-num">60</div><div class="stat-label">Capsules Per Bottle</div></div>
+    <div class="stat"><div class="stat-num">400</div><div class="stat-label">mg Per Capsule</div></div>
+    <div class="stat"><div class="stat-num">90+</div><div class="stat-label">Nutrients in Moringa¹</div></div>
+    <div class="stat"><div class="stat-num">FDA</div><div class="stat-label">Registered PH</div></div>
+  </div>
+  <p class="footnote">¹ Moringa oleifera is widely studied for its broad nutritional profile; nutrient content may vary by form and processing (ref. published nutritional literature). These statements have not been evaluated for therapeutic effect.</p>
+</div>
+
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The Challenge</div>
+      <h2 class="sec-title">Why Many Filipinos Look for <span>Extra Nutritional Support</span></h2>
+      <p class="sec-sub">Modern life is busy. Getting complete nutrition from diet alone isn't always easy — especially with irregular meals and on-the-go lifestyles.</p>
+    </div>
+    <div class="problem-layout">
+      <div class="prob-list">
+        <div class="prob-row"><div class="prob-n">01</div><div><h4>Nutritional Gaps in Everyday Eating</h4><p>Busy schedules, skipped meals, and processed food can make it challenging to consistently meet daily nutritional needs through diet alone.</p></div></div>
+        <div class="prob-row"><div class="prob-n">02</div><div><h4>Demands of Daily Life</h4><p>Work, family, and daily responsibilities place demands on your body. Many Filipinos look for a simple, natural way to support their wellness routine.</p></div></div>
+        <div class="prob-row"><div class="prob-n">03</div><div><h4>Preference for Natural Options</h4><p>More Filipinos prefer plant-based, naturally-derived supplements — ingredients they recognize, rooted in generations of traditional use.</p></div></div>
+      </div>
+      <div class="problem-cta">
+        <h3>Salvicare was made for this.<br/><span>Naturally.</span></h3>
+        <p>Two plant-based ingredients — Moringa Oleifera and Garcinia Mangostana — that have long been recognized in Filipino tradition, combined in one simple daily capsule.*</p>
+        <a href="#bundle" class="btn-on-dark">Try Salvicare Today</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section rule">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Side by Side</div><h2 class="sec-title">Salvicare vs. <span>Generic Multivitamins</span></h2></div>
+    <div class="compare-wrap">
+      <table class="compare">
+        <thead><tr><th></th><th class="salvicare-h">Salvicare</th><th class="regular-h">Generic Multivitamin</th></tr></thead>
+        <tbody>
+          <tr><td>Ingredient Source</td><td>Plant-based — Moringa + Mangosteen</td><td>Synthetic isolates</td></tr>
+          <tr><td>Antioxidant Content</td><td>Natural antioxidants from Mangosteen rind*</td><td>Varies — often synthetic</td></tr>
+          <tr><td>Nutritional Profile</td><td>Broad plant-based nutrient matrix*</td><td>Fixed synthetic formula</td></tr>
+          <tr><td>Rooted in Tradition</td><td><span class="yes">✓</span> Filipino heritage plants</td><td><span class="no">✗</span></td></tr>
+          <tr><td>Added Fiber Benefit</td><td><span class="yes">✓</span> Natural plant matrix</td><td><span class="no">✗</span></td></tr>
+          <tr><td>FDA Registered PH</td><td><span class="yes">✓</span> FR-4000010419296</td><td>Varies by brand</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">The Ingredients</div><h2 class="sec-title">How <span>Salvicare Works</span></h2></div>
+    <div class="how-grid">
+      <div class="how-cell"><div class="how-n">01</div><h3>One Capsule Daily</h3><p>Each Salvicare capsule contains 400mg of Moringa Oleifera combined with Garcinia Mangostana (from the rind) — two plant-based ingredients, one simple daily habit.</p></div>
+      <div class="how-cell"><div class="how-n">02</div><h3>Moringa Nourishes</h3><p>Moringa Oleifera (Malunggay) is recognized for its broad plant-based nutritional profile — vitamins, minerals, and plant compounds that contribute to everyday nourishment.*</p></div>
+      <div class="how-cell"><div class="how-n">03</div><h3>Mangosteen Defends</h3><p>The rind of Garcinia Mangostana contains natural antioxidant compounds that may help support the body's normal defense against oxidative stress from free radicals.*</p></div>
+      <div class="how-cell"><div class="how-n">04</div><h3>Daily — Consistently</h3><p>Both ingredients work together as part of your daily wellness routine. One capsule, every day — build the habit and let it work.*</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section rule" id="ingredients">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">What's Inside</div><h2 class="sec-title">Two Ingredients. <span>Both Known for Generations.</span></h2></div>
+    <div class="ing-grid">
+      <div class="ing-col">
+        <h3>Moringa Powder</h3><div class="ing-sub">Moringa Oleifera — naturally-derived</div>
+        <ul>
+          <li><span class="chk">✓</span>Recognized as one of the most nutritionally studied plant-based ingredients in the world</li>
+          <li><span class="chk">✓</span>Naturally contains vitamins, minerals, and plant compounds in whole-food form</li>
+          <li><span class="chk">✓</span>May help support normal immune function as part of a balanced diet*</li>
+          <li><span class="chk">✓</span>Contributes to everyday nourishment and nutritional balance*</li>
+          <li><span class="chk">✓</span>Malunggay has long been used in Filipino households — a generational wellness tradition</li>
+        </ul>
+      </div>
+      <div class="ing-col">
+        <h3>Garcinia Mangostana</h3><div class="ing-sub">From the Rind — naturally-derived</div>
+        <ul>
+          <li><span class="chk">✓</span>The rind of Mangosteen is widely studied for its natural antioxidant compounds (xanthones)*</li>
+          <li><span class="chk">✓</span>May help support the body's normal defense against oxidative stress*</li>
+          <li><span class="chk">✓</span>May contribute to normal immune and cellular wellness*</li>
+          <li><span class="chk">✓</span>Known as the "Queen of Fruits" in Southeast Asia — widely recognized across the region</li>
+          <li><span class="chk">✓</span>Complements Moringa's nutritional profile for whole-body daily support*</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">6 Reasons to Choose Salvicare</div><h2 class="sec-title">What <span>Salvicare Supports*</span></h2></div>
+    <div class="ben-list">
+      <div class="ben-row"><div class="ben-n">01</div><div><h4>Antioxidant Defense*</h4><p>Mangosteen rind delivers natural antioxidants that work against everyday oxidative stress — your daily shield from the inside.*</p></div></div>
+      <div class="ben-row"><div class="ben-n">02</div><div><h4>Daily Immune Support*</h4><p>Supports normal immune function* — Moringa's nutrient matrix gives your body the plant-based foundation it needs every single day.</p></div></div>
+      <div class="ben-row"><div class="ben-n">03</div><div><h4>Skin Cell Wellness*</h4><p>Protects normal skin cells from oxidative damage* — a gentle, plant-sourced habit you take once a day and feel over time.</p></div></div>
+      <div class="ben-row"><div class="ben-n">04</div><div><h4>Nutritional Balance*</h4><p>Moringa's broad plant-based profile fills in the nutritional gaps that modern, on-the-go eating leaves behind.*</p></div></div>
+      <div class="ben-row"><div class="ben-n">05</div><div><h4>Daily Vitality*</h4><p>Together, these two plants contribute to a steady, natural sense of wellness — built one capsule, one day at a time.*</p></div></div>
+      <div class="ben-row"><div class="ben-n">06</div><div><h4>Rooted in Filipino Tradition</h4><p>Malunggay and Mangosteen. Two plants Filipinos have trusted for generations — now in one capsule you take before you start your day.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section rule">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Para sa Katawan Mo</div><h2 class="sec-title">Mangosteen Rind — <span>Natural Antioxidant Support Para sa Araw-Araw*</span></h2><p class="sec-sub">Ang balat ng Mangosteen ay isa sa mga pinaka-pinag-aralan na natural na pinagkukunan ng antioxidants sa Southeast Asia. Dalawang sangkap, isang kapsula — para sa iyong araw-araw na wellness.*</p></div>
+    <div class="well-grid">
+      <div class="well-col"><h4>Free Radical Defense*</h4><p>Natural antioxidant compounds from Mangosteen rind may help support the body's normal defense against oxidative stress from free radicals.*</p></div>
+      <div class="well-col"><h4>Whole-Body Nourishment*</h4><p>Moringa's broad nutritional profile contributes to everyday nourishment — vitamins, minerals, and plant compounds in natural, whole-food form.*</p></div>
+      <div class="well-col"><h4>Skin Cell Protection*</h4><p>Antioxidants may help support normal skin cell health by protecting against oxidative damage — a gentle, daily habit from the inside.*</p></div>
+    </div>
+    <div class="well-strip">
+      <div><span>·</span>Naturally-derived Moringa</div><div><span>·</span>Garcinia Mangostana Rind</div><div><span>·</span>1 Capsule Daily</div><div><span>·</span>Plant-Based Formula</div>
+    </div>
+    <p class="well-note">*Structure/function claims only. Results may vary. Salvicare is a food supplement — not intended to diagnose, treat, cure, or prevent any disease.</p>
+  </div>
+</section>
+
+<div class="natc-bar">
+  <div class="wrap">
+    <strong>⚠️ NO APPROVED THERAPEUTIC CLAIMS.</strong> Salvicare is a food supplement (FR-4000010419296). It is <strong>not intended to diagnose, treat, cure, or prevent any disease.</strong> Claims marked * are structure/function statements only. Consult your physician before use if you have a medical condition or are taking medication.<br/>
+    <strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong>
+  </div>
+</div>
+
+<section class="section dosage" id="dosage">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Directions</div><h2 class="sec-title">How to Take Salvicare</h2></div>
+    <div class="dose-grid">
+      <div class="dose-cell"><div class="dose-n">01</div><h3>1 Capsule Daily</h3><p>Take one capsule per day as recommended by a health care professional. Build the habit at a consistent time each day.</p></div>
+      <div class="dose-cell"><div class="dose-n">02</div><h3>With a Full Glass of Water</h3><p>Take with a full glass of water. Can be taken with or after a meal for comfort.</p></div>
+      <div class="dose-cell"><div class="dose-n">03</div><h3>Be Consistent</h3><p>Both ingredients work best as part of a consistent daily wellness routine. One capsule, every day.*</p></div>
+    </div>
+    <div class="dose-note">⚠️ Food Supplement — NO APPROVED THERAPEUTIC CLAIMS. Not intended to diagnose, treat, cure, or prevent any disease. Do not exceed the recommended daily usage. Consult your physician if pregnant, lactating, diabetic, or on maintenance medication. Keep out of reach of children.<br/><strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong></div>
+  </div>
+</section>
+
+<section class="section rule" id="testimonials">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Customer Reviews</div><h2 class="sec-title">Real Reviews, <span>Coming Soon</span></h2><p class="sec-sub">We're collecting verified reviews from real customers. This section will show genuine, checkable purchases only — no invented quotes, ever.</p></div>
+  </div>
+</section>
+
+<section class="section rule" id="bundle">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Choose Your Bundle</div><h2 class="sec-title">Simple, <span>Straightforward Pricing</span></h2></div>
+    <div class="bundle-grid">
+      <div class="bundle-col">
+        <div class="bundle-tag">Starter</div>
+        <div class="bundle-name">1 Bottle</div>
+        <div class="bundle-price">₱1,322</div>
+        <div class="bundle-price-note">60 capsules · 2-month supply</div>
+        <ul class="bundle-perks"><li><span class="pk">✓</span>60 capsules</li><li><span class="pk">✓</span>Standard shipping</li><li><span class="pk">✓</span>COD / GCash</li></ul>
+        <a href="#" class="bundle-btn">Order 1 Bottle</a>
+      </div>
+      <div class="bundle-col">
+        <div class="most-chosen">🔥 Pinaka-Sulit — Most Chosen</div>
+        <div class="bundle-tag">Best Value</div>
+        <div class="bundle-name">2 Bottles</div>
+        <div class="bundle-price">₱2,500</div>
+        <div class="bundle-price-note">120 capsules · 4-month supply</div>
+        <div class="bundle-save">Save ₱144 · FREE Shipping</div>
+        <ul class="bundle-perks"><li><span class="pk">✓</span>120 capsules</li><li><span class="pk">✓</span>FREE shipping nationwide</li><li><span class="pk">✓</span>COD / GCash / Bank Transfer</li><li><span class="pk">✓</span>Priority processing</li></ul>
+        <a href="#" class="bundle-btn">Order 2 Bottles</a>
+      </div>
+      <div class="bundle-col">
+        <div class="bundle-tag">Family Pack</div>
+        <div class="bundle-name">3 Bottles</div>
+        <div class="bundle-price">₱3,600</div>
+        <div class="bundle-price-note">180 capsules · 6-month supply</div>
+        <div class="bundle-save">Save ₱366 · FREE Shipping</div>
+        <ul class="bundle-perks"><li><span class="pk">✓</span>180 capsules</li><li><span class="pk">✓</span>FREE shipping nationwide</li><li><span class="pk">✓</span>COD / GCash / Bank Transfer</li><li><span class="pk">✓</span>Priority processing</li><li><span class="pk">✓</span>Share with family</li></ul>
+        <a href="#" class="bundle-btn">Order 3 Bottles</a>
+      </div>
+    </div>
+    <p class="bundle-note">All orders include COD or GCash payment options. Delivered nationwide via J&T or LBC.</p>
+    <div class="sulit"><div class="sb-label">Is it worth it?</div><div class="sb-main">Only ₱22 per day</div><div class="sb-sub">₱1,322 ÷ 60 capsules — less than a cup of coffee for daily plant-based wellness support.*</div></div>
+  </div>
+</section>
+
+<section class="section guarantee">
+  <div class="wrap">
+    <div class="guarantee-layout">
+      <div class="g-num-block">60<span>Day Guarantee</span></div>
+      <div>
+        <h2>Satisfaction Guarantee</h2>
+        <p>Try Salvicare for 60 days. If you're not satisfied with your experience — for any reason — contact us and we'll make it right. We stand behind every bottle.</p>
+        <div class="g-terms"><div><span>✓</span>60 days to try it</div><div><span>✓</span>No complicated process</div><div><span>✓</span>Contact us directly</div><div><span>✓</span>We'll make it right</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section lead">
+  <div class="wrap">
+    <h2>Get Notified on <span>Promos & New Bundles</span></h2>
+    <p>Be first to know about restocks, exclusive bundles, and wellness tips from I2M2 Trading.</p>
+    <form class="lead-form" onsubmit="return false;"><input type="email" placeholder="Enter your email address"/><button type="submit">Notify Me</button></form>
+    <p class="lead-note">Walang spam. Mag-unsubscribe anytime.</p>
+  </div>
+</section>
+
+<section class="section rule" id="faq">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Mga Tanong</div><h2 class="sec-title">Frequently Asked <span>Questions</span></h2></div>
+    <div class="faq-wrap">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Ano ang Salvicare Capsule?<span class="faq-icon">+</span></button><div class="faq-a">Ang Salvicare Capsule ay isang natural na food supplement na gawa sa Moringa Oleifera (Malunggay) at Garcinia Mangostana (mula sa balat ng Mangosteen). Ito ay isang plant-based supplement para sa araw-araw na wellness. Hindi ito gamot at walang Approved Therapeutic Claims.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Bakit Moringa at Mangosteen?<span class="faq-icon">+</span></button><div class="faq-a">Ang Moringa (Malunggay) ay matagal nang kilala ng mga Pilipino bilang isang masustansyang halaman. Ang Mangosteen naman ay kilala sa Southeast Asia dahil sa natural na antioxidant content nito. Ang dalawa ay pinagsama para sa isang simpleng araw-araw na plant-based supplement.*</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Ilan ang capsules sa isang bote?<span class="faq-icon">+</span></button><div class="faq-a">60 capsules bawat bote — sapat para sa 60 araw sa isang capsule bawat araw. Available din sa blister pack.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Pwede bang inumin ng lahat?<span class="faq-icon">+</span></button><div class="faq-a">Ang Salvicare ay para sa mga matatanda. Kumonsulta muna sa inyong doktor bago uminom — lalo na kung buntis, nagpapasuso, diabetiko, o may maintenance medication. Hindi ito gamot at hindi intended to diagnose, treat, cure, or prevent any disease.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Magkano ang Salvicare?<span class="faq-icon">+</span></button><div class="faq-a">Ang SRP ay ₱1,322 per bottle (60 capsules). Available din ang 2-bottle bundle sa ₱2,500 (save ₱144, FREE shipping) at 3-bottle bundle sa ₱3,600 (save ₱366, FREE shipping).</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Available ba ang Cash on Delivery (COD)?<span class="faq-icon">+</span></button><div class="faq-a">Oo — available ang COD, GCash, at bank transfer. Pwede kang mag-order direkta sa amin sa Facebook o sa pamamagitan ng aming online order form. Lahat ng orders ay i-deliver via J&T o LBC.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Saan pwedeng bumili ng Salvicare?<span class="faq-icon">+</span></button><div class="faq-a">Available ang Salvicare direkta sa aming Facebook page at sa pamamagitan ng aming online order form. I-message kami para sa bulk orders o reseller inquiries.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section final-cta" id="buy">
+  <div class="wrap">
+    <div class="final-layout">
+      <div>
+        <h2>Handa ka na bang subukan ang <span>natural</span> na Malunggay + Mangosteen?</h2>
+        <p>I-order sa preferred channel mo. COD available sa buong Pilipinas. Libre ang shipping sa 2+ bottles.</p>
+        <div class="final-trust"><div><span>✓</span>FDA Registered PH</div><div><span>✓</span>COD Available Nationwide</div><div><span>✓</span>Free Shipping 2+ Bottles</div><div><span>✓</span>60-Day Guarantee</div><div><span>✓</span>Plant-Based Ingredients</div></div>
+      </div>
+      <div class="channels">
+        <a href="#" class="ch-link">Message on Facebook <span>→</span></a>
+        <a href="#contact" class="ch-link">Contact Directly <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section rule">
+  <div class="wrap">
+    <div class="section-head"><div class="eyebrow">Regulatory Compliance</div><h2 class="sec-title">FDA <span>Registered</span></h2></div>
+    <div class="fda-doc">
+      <div class="fda-tag">FDA Philippines</div>
+      <div class="fda-regnum">FR-4000010419296</div>
+      <p class="fda-note">Registered as Food Supplement with No Approved Therapeutic Claims</p>
+      <div class="fda-dates"><div><div class="fda-d-label">Issued</div><div class="fda-d-val">September 09, 2024</div></div><div><div class="fda-d-label">Valid Until</div><div class="fda-d-val">September 09, 2029</div></div></div>
+      <div class="fda-full"><strong>FOOD SUPPLEMENT — NO APPROVED THERAPEUTIC CLAIMS.</strong> This product is not intended to diagnose, treat, cure, or prevent any disease. These statements have not been evaluated by the Food and Drug Administration of the Philippines for therapeutic effect. Results may vary. Consult a qualified healthcare professional before use, especially if pregnant, lactating, diabetic, or on maintenance medication.<br/><br/><strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="f-logo"><img src="salvicare-logo.svg" alt="Salvicare"/></div>
+        <div class="f-tagline">Natural Ingredients. Daily Support. Better Wellness.</div>
+        <div class="f-company"><strong>I2M2 Trading</strong><br/>Unit 310 Medecor Bldg.,<br/>222 Ortigas Avenue,<br/>Brgy. Greenhills, San Juan,<br/>Metro Manila</div>
+      </div>
+      <div class="f-col"><h4>Navigation</h4><a href="#why">Why Salvicare</a><a href="#ingredients">Ingredients</a><a href="#bundle">Pricing</a><a href="#faq">FAQ</a></div>
+      <div class="f-col"><h4>Order Now</h4><a href="#">Facebook Page</a><a href="#contact">Contact Us</a></div>
+    </div>
+    <div class="footer-bottom">* Structure/function claims only. Salvicare is a food supplement (FDA PH FR-4000010419296). <strong>NO APPROVED THERAPEUTIC CLAIMS.</strong> Not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Always consult your physician before use, especially if pregnant, lactating, diabetic, or on maintenance medication.<br/><strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong> &copy; 2026 I2M2 Trading. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  function toggleNav(){document.getElementById('mobileNav').classList.toggle('open');}
+  function closeNav(){document.getElementById('mobileNav').classList.remove('open');}
+  function toggleFaq(btn){
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(q=>q.classList.remove('open'));
+    if(!isOpen){answer.classList.add('open');btn.classList.add('open');}
+  }
+</script>
+</body>
+</html>

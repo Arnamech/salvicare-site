@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Order Received — Salvicare</title>
+<meta name="description" content="Thank you for your Salvicare order — payment confirmation and what happens next."/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--ink:#12241A;--green:#1A3D1B;--gold:#8B7335;--paper:#FBFAF6;--white:#fff;--line:rgba(18,36,26,.14);--gray:#5B6B5D;}
+  body{font-family:'Open Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;min-height:100vh;display:flex;flex-direction:column;}
+  h1{font-family:'Montserrat',sans-serif;color:var(--green);}
+  .wrap{max-width:560px;margin:0 auto;padding:64px clamp(20px,5vw,40px);text-align:center;flex:1;}
+  .check{font-size:3rem;margin-bottom:16px;}
+  h1{font-size:clamp(1.6rem,4vw,2.1rem);font-weight:900;margin-bottom:12px;}
+  p{font-size:.95rem;color:var(--gray);margin-bottom:10px;}
+  .steps{text-align:left;background:var(--white);border:1px solid var(--line);padding:20px 24px;margin:24px 0;border-radius:4px;}
+  .steps li{margin-bottom:8px;font-size:.88rem;}
+  .btn{display:inline-block;background:var(--green);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:800;font-size:.85rem;padding:14px 28px;margin-top:8px;}
+  .btn:hover{background:var(--gold);}
+  a{text-decoration:none;color:inherit;}
+  .perk{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--gold);padding:22px 24px;margin:28px 0;border-radius:4px;text-align:left;}
+  .perk h2{font-family:'Montserrat',sans-serif;color:var(--green);font-size:1.05rem;font-weight:800;margin-bottom:6px;}
+  .perk p{margin-bottom:14px;}
+  .perk-form{display:flex;gap:8px;flex-wrap:wrap;}
+  .perk-form input[type="text"]{flex:1;min-width:180px;padding:11px 12px;border:1px solid var(--line);border-radius:3px;font-size:.85rem;font-family:'Open Sans',sans-serif;}
+  .perk-btn{background:var(--gold);color:var(--white);font-family:'Montserrat',sans-serif;font-weight:800;font-size:.8rem;padding:12px 20px;border:none;border-radius:3px;cursor:pointer;}
+  .perk-btn:hover{background:var(--green);}
+  .perk-fine{font-size:.68rem;color:var(--gray);margin-top:10px;margin-bottom:0;}
+  footer{background:var(--green);color:rgba(255,255,255,.7);text-align:center;font-size:.7rem;padding:20px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="check">✅</div>
+  <h1>Salamat! Your order is confirmed.</h1>
+  <p>We've received your payment and your order is now being prepared.</p>
+  <div class="steps">
+    <ol style="padding-left:18px;">
+      <li>You'll get an order confirmation via SMS/Facebook shortly.</li>
+      <li>Once your package is dispatched, we'll send you a tracking number/link.</li>
+      <li>Delivery takes 2–7 business days nationwide (same-day for select Metro Manila areas).</li>
+    </ol>
+  </div>
+
+  <div class="perk">
+    <h2>🎁 One more thing — free Salvicare Coffee on us</h2>
+    <p>Sign up for our newsletter (health tips, promos, perks — not spam) and we'll add a free bag of Salvicare Coffee to your next order.</p>
+    <form class="perk-form" id="newsletterForm">
+      <input type="text" id="newsletterContact" placeholder="Phone number or email" required/>
+      <button type="submit" class="perk-btn">Sign Me Up</button>
+    </form>
+    <p class="perk-fine">Optional — this order ships either way. By signing up you agree to receive marketing messages and can unsubscribe anytime. See our <a href="privacy-policy.html" style="text-decoration:underline;">Privacy Policy</a>.</p>
+  </div>
+
+  <p>Questions about your order? Message us on Facebook or check our <a href="terms-and-refunds.html" style="text-decoration:underline;">Terms &amp; Refund Policy</a>.</p>
+  <a href="salvicare-quick-order.html" class="btn">← Back to Salvicare</a>
+</div>
+<footer>&copy; 2026 I2M2 Trading. All rights reserved.</footer>
+
+<script>
+  // SETUP: paste the n8n newsletter-intake webhook URL here once it exists.
+  // Until then, submitting shows a manual-signup fallback instead of failing silently.
+  var NEWSLETTER_WEBHOOK_URL = "";
+
+  document.getElementById("newsletterForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var contact = document.getElementById("newsletterContact").value.trim();
+    if (!contact) return;
+
+    if (!NEWSLETTER_WEBHOOK_URL) {
+      alert("Newsletter signup is being set up. Message us on Facebook with your number and we'll add you manually — your free coffee is still on us!");
+      return;
+    }
+    fetch(NEWSLETTER_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contact: contact, source: "thank-you-page", incentive: "free-salvicare-coffee" })
+    }).then(function () {
+      document.querySelector(".perk").innerHTML = "<h2>🎉 You're in!</h2><p>We'll add your free Salvicare Coffee to your next order and send updates to " + contact + ".</p>";
+    }).catch(function () {
+      alert("Something went wrong — message us on Facebook and we'll sign you up manually.");
+    });
+  });
+</script>
+</body>
+</html>
