@@ -23,7 +23,7 @@
 
   /* topline */
   .topline{background:var(--green);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;padding:9px 20px;text-align:center;}
-  .topline em{color:#A8D5A2;font-style:normal;font-weight:800;}
+  .topline em{color:var(--gold);font-style:normal;font-weight:800;}
 
   /* nav */
   nav{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:99;}
@@ -57,7 +57,7 @@
   .proof-strip{background:var(--ink);color:rgba(255,255,255,.85);font-size:.74rem;font-weight:600;}
   .proof-strip .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 18px;padding:12px clamp(20px,5vw,40px);}
   .proof-strip .wrap>div{min-width:0;text-align:center;}
-  .proof-strip strong{color:#A8D5A2;}
+  .proof-strip strong{color:var(--gold);}
 
   /* bundle */
   .bundle{padding:clamp(40px,6vw,64px) 0;}
@@ -185,7 +185,7 @@
       btn.addEventListener("click", function (e) {
         e.preventDefault();
         window.location.href = "#contact";
-        alert("Online payment is being set up. For now, message us on Facebook or call to order via COD.");
+        alert("Online payment is being set up. For now, please contact us to order via COD.");
       });
     }
   });
