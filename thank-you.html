@@ -31,15 +31,36 @@
   .perk-btn:hover{background:var(--red);}
   .perk-fine{font-size:.68rem;color:var(--gray);margin-top:10px;margin-bottom:0;}
   footer{background:var(--red);color:rgba(255,255,255,.7);text-align:center;font-size:.7rem;padding:20px;}
+  .order-card{display:none;text-align:left;background:var(--white);border:1px solid var(--line);border-radius:4px;padding:20px 24px;margin:24px 0;}
+  .order-card.show{display:block;}
+  .order-row{display:flex;justify-content:space-between;gap:12px;font-size:.86rem;padding:7px 0;border-bottom:1px solid var(--line);}
+  .order-row:last-child{border-bottom:none;}
+  .order-row span:first-child{color:var(--gray);}
+  .order-row span:last-child{font-weight:700;text-align:right;}
+  .pm-pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.72rem;font-weight:800;}
+  .pm-pill.cod{background:#FFF3D6;color:#8B5E2B;}
+  .pm-pill.gcash{background:#DCEEF5;color:#2D6B87;}
+  .pm-pill.card{background:#E1F5E9;color:#1A7A3D;}
+  .gcash-note{font-size:.78rem;color:var(--gray);margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);}
+  .natc-bar{background:#FFF7E6;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);padding:16px 20px;font-size:.72rem;line-height:1.7;color:#5A4A1F;text-align:center;}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="check">✅</div>
-  <h1>Salamat! Your order is confirmed.</h1>
-  <p>We've received your payment and your order is now being prepared.</p>
+  <h1 id="headline">Salamat! Your order is confirmed.</h1>
+  <p id="subtext">We've received your order and it's now being prepared.</p>
+
+  <div class="order-card" id="orderCard">
+    <div class="order-row"><span>Order Reference</span><span id="ordRef">—</span></div>
+    <div class="order-row"><span>Item</span><span id="ordItem">—</span></div>
+    <div class="order-row"><span>Amount</span><span id="ordAmt">—</span></div>
+    <div class="order-row"><span>Payment Method</span><span id="ordMethod">—</span></div>
+    <div class="gcash-note" id="gcashNote" style="display:none;"></div>
+  </div>
+
   <div class="steps">
-    <ol style="padding-left:18px;">
+    <ol style="padding-left:18px;" id="stepsList">
       <li>You'll get an order confirmation via SMS shortly.</li>
       <li>Once your package is dispatched, we'll send you a tracking number/link.</li>
       <li>Delivery takes 2–7 business days nationwide (same-day for select Metro Manila areas).</li>
@@ -59,9 +80,88 @@
   <p>Questions about your order? <a href="index.html#contact" style="text-decoration:underline;">Contact us</a> or check our <a href="https://i2m2trading.com/terms-and-refunds.html" style="text-decoration:underline;">Terms &amp; Refund Policy</a>.</p>
   <a href="index.html" class="btn">← Back to Salvicare</a>
 </div>
+<div class="natc-bar">
+  <strong>⚠️ NO APPROVED THERAPEUTIC CLAIMS.</strong> Salvicare is a food supplement (FR-4000010419296), not intended to diagnose, treat, cure, or prevent any disease.<br/>
+  <strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong>
+</div>
 <footer>&copy; 2026 I2M2 Trading. All rights reserved.</footer>
 
 <script>
+  (function(){
+    var qp = new URLSearchParams(location.search);
+    var method = qp.get("method");
+    var ref = qp.get("ref");
+    var item = qp.get("item");
+    var amt = qp.get("amt");
+    var gref = qp.get("gref");
+    if (!ref || !method) return; // direct visit with no order context — keep the generic copy above
+
+    var COPY = {
+      cod: {
+        headline: "Salamat! Your COD order is confirmed.",
+        subtext: "Please have exact cash ready — our rider collects payment on delivery.",
+        pill: "💵 Cash on Delivery",
+        pillClass: "cod",
+        steps: [
+          "Please prepare exact cash for the rider.",
+          "Once your package is dispatched, we'll send you a tracking number via SMS.",
+          "Delivery takes 2–7 business days nationwide (same-day for select Metro Manila areas)."
+        ]
+      },
+      gcash: {
+        headline: "Salamat! We've received your GCash payment.",
+        subtext: "We're verifying your GCash reference number now.",
+        pill: "📱 GCash",
+        pillClass: "gcash",
+        steps: [
+          "We're verifying your GCash reference — usually within a few hours.",
+          "Once verified and dispatched, we'll send you a tracking number via SMS.",
+          "Delivery takes 2–7 business days nationwide (same-day for select Metro Manila areas)."
+        ]
+      },
+      card: {
+        headline: "Salamat! Your payment was successful.",
+        subtext: "Your card payment is confirmed and your order is now being prepared.",
+        pill: "💳 Card (Paid)",
+        pillClass: "card",
+        steps: [
+          "Your payment is confirmed — no further action needed on your end.",
+          "Once your package is dispatched, we'll send you a tracking number via SMS.",
+          "Delivery takes 2–7 business days nationwide (same-day for select Metro Manila areas)."
+        ]
+      }
+    };
+    var c = Object.prototype.hasOwnProperty.call(COPY, method) ? COPY[method] : null;
+    if (!c) return;
+
+    document.getElementById("headline").textContent = c.headline;
+    document.getElementById("subtext").textContent = c.subtext;
+    document.getElementById("ordRef").textContent = ref;
+    if (item) document.getElementById("ordItem").textContent = item;
+    if (amt) document.getElementById("ordAmt").textContent = "₱" + Number(amt).toLocaleString("en-PH");
+    var pillEl = document.getElementById("ordMethod");
+    pillEl.innerHTML = "";
+    var pill = document.createElement("span");
+    pill.className = "pm-pill " + c.pillClass;
+    pill.textContent = c.pill;
+    pillEl.appendChild(pill);
+    document.getElementById("orderCard").classList.add("show");
+
+    if (method === "gcash" && gref) {
+      var note = document.getElementById("gcashNote");
+      note.textContent = "GCash Reference: " + gref + " — we verify against our account and message you once confirmed.";
+      note.style.display = "block";
+    }
+
+    var list = document.getElementById("stepsList");
+    list.innerHTML = "";
+    c.steps.forEach(function(s){
+      var li = document.createElement("li");
+      li.textContent = s;
+      list.appendChild(li);
+    });
+  })();
+
   // SETUP: paste the n8n newsletter-intake webhook URL here once it exists.
   // Until then, submitting shows a manual-signup fallback instead of failing silently.
   var NEWSLETTER_WEBHOOK_URL = "";

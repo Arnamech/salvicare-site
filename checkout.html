@@ -247,6 +247,14 @@
   var currentMethod = "cod";
   var frame = document.getElementById("cc3ds");
   var pollTimer = null;
+  var lastOrderRef = "";
+
+  function thankYouUrl(method, orderRef, gRef){
+    var b = BUNDLES[currentKey];
+    var url = "thank-you.html?method=" + method + "&ref=" + encodeURIComponent(orderRef) + "&item=" + encodeURIComponent(b.label) + "&amt=" + b.amount;
+    if (gRef) url += "&gref=" + encodeURIComponent(gRef);
+    return url;
+  }
 
   function peso(n){ return "₱" + n.toLocaleString("en-PH"); }
   function b64(s){ return btoa(s); }
@@ -315,15 +323,16 @@
     if (!d.address) { setStatus("codStatus", "Please enter a delivery address for COD.", "error"); return; }
     var btn = this; btn.disabled = true;
     setStatus("codStatus", "Placing your order…", "loading");
+    var orderRef = newOrderRef();
     fetch(COD_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
       body: JSON.stringify({
         method: "cod", productKey: currentKey, amountPHP: BUNDLES[currentKey].amount,
-        customerName: d.name, email: d.email, phone: d.phone, address: d.address, orderRef: newOrderRef()
+        customerName: d.name, email: d.email, phone: d.phone, address: d.address, orderRef: orderRef
       })
     }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
-      .then(function(){ location.href = "thank-you.html?method=cod"; })
+      .then(function(){ location.href = thankYouUrl("cod", orderRef); })
       .catch(function(){ setStatus("codStatus", "Could not place your order. Please try again or message us on Facebook.", "error"); btn.disabled = false; });
   });
 
@@ -336,16 +345,17 @@
     if (!ref) { setStatus("gcashStatus", "Please paste your GCash Reference Number.", "error"); return; }
     var btn = this; btn.disabled = true;
     setStatus("gcashStatus", "Submitting your payment…", "loading");
+    var orderRef = newOrderRef();
     fetch(GCASH_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
       body: JSON.stringify({
         method: "gcash", productKey: currentKey, amountPHP: BUNDLES[currentKey].amount,
         customerName: d.name, email: d.email, phone: d.phone, address: d.address,
-        gcashReference: ref, orderRef: newOrderRef()
+        gcashReference: ref, orderRef: orderRef
       })
     }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
-      .then(function(){ location.href = "thank-you.html?method=gcash"; })
+      .then(function(){ location.href = thankYouUrl("gcash", orderRef, ref); })
       .catch(function(){ setStatus("gcashStatus", "Could not submit. Please try again or message us on Facebook.", "error"); btn.disabled = false; });
   });
 
@@ -353,7 +363,7 @@
   function showCardSuccess(){
     frame.style.display = "none";
     setStatus("cardStatus", "✓ Payment received! Redirecting…", "success");
-    setTimeout(function(){ location.href = "thank-you.html?method=card"; }, 1200);
+    setTimeout(function(){ location.href = thankYouUrl("card", lastOrderRef); }, 1200);
   }
   function pollIntent(intentId, clientKey){
     clearInterval(pollTimer);
@@ -388,6 +398,7 @@
     var btn = this; btn.disabled = true;
     setStatus("cardStatus", "Processing…", "loading");
     var orderRef = newOrderRef();
+    lastOrderRef = orderRef;
 
     fetch(CARD_ENDPOINT, {
       method: "POST",
