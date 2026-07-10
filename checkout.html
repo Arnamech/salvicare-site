@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checkout — Salvicare Capsule</title>
+<meta name="description" content="Complete your Salvicare Capsule order. Cash on Delivery, GCash, or card. FDA Registered PH FR-4000010419296."/>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --ink:#1E1512; --red:#B40000; --red-mid:#A80000; --gold:#8B7335;
+    --paper:#FBFAF6; --white:#fff; --line:rgba(30,21,18,.14); --gray:#5B6B5D;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Open Sans',sans-serif;color:var(--ink);background:var(--paper);}
+  h1,h2,h3{font-family:'Montserrat',sans-serif;}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 clamp(20px,5vw,40px);}
+
+  nav{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:58px;gap:10px;}
+  .nav-back{font-size:.78rem;font-weight:700;color:var(--gray);}
+  .nav-back:hover{color:var(--red);}
+  .nav-logo img{height:24px;}
+
+  .head{padding:30px 0 8px;}
+  .head h1{font-size:clamp(1.5rem,4vw,2.1rem);font-weight:900;color:var(--red);letter-spacing:-.5px;}
+  .head p{font-size:.9rem;color:var(--gray);margin-top:4px;}
+
+  .layout{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;padding:22px 0 60px;align-items:start;}
+  @media(max-width:800px){.layout{grid-template-columns:1fr;}}
+
+  .card{background:var(--white);border:1px solid var(--line);padding:24px 26px;}
+  .card + .card{margin-top:18px;}
+  .card-label{font-size:.66rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+
+  .bundle-pick{display:grid;gap:10px;}
+  .bundle-opt{display:flex;align-items:center;gap:14px;border:1.5px solid var(--line);padding:14px 16px;cursor:pointer;position:relative;}
+  .bundle-opt:hover{border-color:var(--gold);}
+  .bundle-opt.selected{border-color:var(--red);background:rgba(180,0,0,.04);}
+  .bundle-opt input{accent-color:var(--red);width:18px;height:18px;flex-shrink:0;}
+  .bo-name{font-weight:800;font-size:.92rem;}
+  .bo-note{font-size:.74rem;color:var(--gray);}
+  .bo-price{margin-left:auto;text-align:right;font-family:'Montserrat',sans-serif;font-weight:900;color:var(--red);font-size:1.15rem;white-space:nowrap;}
+  .bo-save{display:block;font-size:.68rem;font-weight:800;color:var(--gold);}
+
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .field{margin-bottom:14px;}
+  .field:last-child{margin-bottom:0;}
+  .field label{display:block;font-size:.72rem;font-weight:700;margin-bottom:5px;}
+  .field input{width:100%;padding:11px 13px;border:1px solid var(--line);font-size:.88rem;font-family:'Open Sans',sans-serif;background:var(--paper);}
+  .field input:focus{outline:2px solid var(--red);outline-offset:1px;}
+  @media(max-width:480px){.field-row{grid-template-columns:1fr;}}
+
+  .pm-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+  .pm-tab{text-align:center;padding:12px 8px;border:1.5px solid var(--line);font-size:.76rem;font-weight:800;cursor:pointer;color:var(--gray);background:none;font-family:'Montserrat',sans-serif;}
+  .pm-tab.active{border-color:var(--red);color:var(--red);background:rgba(180,0,0,.04);}
+  .pm-panel{display:none;}
+  .pm-panel.active{display:block;}
+  .cod-note{font-size:.84rem;line-height:1.6;background:var(--paper);border:1px dashed var(--line);padding:14px 16px;margin-bottom:14px;}
+
+  .gcash-box{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;background:var(--paper);border:1px solid var(--line);padding:18px;margin-bottom:16px;}
+  @media(max-width:520px){.gcash-box{grid-template-columns:1fr;justify-items:center;text-align:center;}}
+  .gcash-qr{width:150px;height:150px;background:repeating-conic-gradient(#1E1512 0% 25%, #fff 0% 50%) 0 0/16px 16px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:800;text-align:center;padding:8px;}
+  .gcash-acct-name{font-weight:800;font-size:.95rem;}
+  .gcash-number{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:var(--red);margin:4px 0;letter-spacing:.5px;}
+  .gcash-amount{font-size:.8rem;color:var(--gray);}
+  .steps-mini{counter-reset:s;margin:0 0 14px;padding:0;list-style:none;}
+  .steps-mini li{counter-increment:s;font-size:.84rem;line-height:1.6;padding-left:26px;position:relative;margin-bottom:6px;}
+  .steps-mini li::before{content:counter(s);position:absolute;left:0;top:1px;width:18px;height:18px;background:var(--red);color:#fff;border-radius:50%;font-size:.66rem;font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  @media(max-width:480px){.field-row3{grid-template-columns:1fr;}}
+
+  .pay-btn{width:100%;background:var(--red);color:var(--white);border:none;font-family:'Montserrat',sans-serif;font-size:.92rem;font-weight:800;padding:15px;cursor:pointer;margin-top:6px;}
+  .pay-btn:hover{background:var(--gold);}
+  .pay-btn:disabled{opacity:.55;cursor:not-allowed;}
+  .status{font-size:.8rem;font-weight:700;margin-top:12px;text-align:center;min-height:1.2em;}
+  .status.loading{color:var(--gray);}
+  .status.error{color:#B00020;}
+  .status.success{color:#1A7A3D;}
+  .secure-note{font-size:.68rem;color:var(--gray);text-align:center;margin-top:10px;}
+  .cc-3ds{display:none;width:100%;height:420px;border:1px solid var(--line);margin-top:12px;}
+
+  .summary-line{display:flex;justify-content:space-between;font-size:.86rem;padding:8px 0;border-bottom:1px solid var(--line);}
+  .summary-total{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:var(--red);padding-top:14px;margin-top:6px;border-top:2px solid var(--ink);}
+  .trust-mini{display:flex;flex-direction:column;gap:8px;margin-top:18px;font-size:.76rem;color:var(--gray);}
+  .trust-mini span{color:var(--red-mid);font-weight:800;margin-right:6px;}
+
+  .natc-bar{background:#FFF7E6;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);padding:16px 0;font-size:.72rem;line-height:1.7;color:#5A4A1F;text-align:center;}
+  footer{background:var(--red);color:rgba(255,255,255,.85);padding:26px 0;font-size:.7rem;text-align:center;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="nav-back">← Back to Salvicare</a>
+    <a href="index.html" class="nav-logo"><img src="salvicare-logo.svg" alt="Salvicare"/></a>
+  </div>
+</nav>
+
+<div class="wrap head">
+  <h1>Complete Your Order</h1>
+  <p>Choose your bundle, enter your details, and pick how you'd like to pay.</p>
+</div>
+
+<div class="wrap">
+  <div class="layout">
+
+    <div>
+      <div class="card">
+        <div class="card-label">Step 1 — Choose Your Bundle</div>
+        <div class="bundle-pick" id="bundlePick">
+          <label class="bundle-opt" data-key="capsule-1" data-price="1322">
+            <input type="radio" name="bundle" value="capsule-1"/>
+            <div><div class="bo-name">1 Bottle</div><div class="bo-note">60 capsules · 2-month supply</div></div>
+            <div class="bo-price">₱1,322</div>
+          </label>
+          <label class="bundle-opt" data-key="capsule-2" data-price="2500">
+            <input type="radio" name="bundle" value="capsule-2"/>
+            <div><div class="bo-name">2 Bottles</div><div class="bo-note">120 capsules · 4-month supply</div></div>
+            <div class="bo-price">₱2,500<span class="bo-save">Save ₱144 · FREE Shipping</span></div>
+          </label>
+          <label class="bundle-opt" data-key="capsule-3" data-price="3600">
+            <input type="radio" name="bundle" value="capsule-3"/>
+            <div><div class="bo-name">3 Bottles</div><div class="bo-note">180 capsules · 6-month supply</div></div>
+            <div class="bo-price">₱3,600<span class="bo-save">Save ₱366 · FREE Shipping</span></div>
+          </label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Step 2 — Your Details</div>
+        <div class="field"><label for="fName">Full Name</label><input id="fName" autocomplete="name" placeholder="Juan Dela Cruz"/></div>
+        <div class="field-row">
+          <div class="field"><label for="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" placeholder="juan@email.com"/></div>
+          <div class="field"><label for="fPhone">Phone</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="09xx xxx xxxx"/></div>
+        </div>
+        <div class="field"><label for="fAddr">Delivery Address</label><input id="fAddr" autocomplete="street-address" placeholder="House/Unit, Street, Barangay, City, Province"/></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Step 3 — How Would You Like To Pay?</div>
+        <div class="pm-tabs">
+          <button type="button" class="pm-tab active" data-method="cod">💵 COD</button>
+          <button type="button" class="pm-tab" data-method="gcash">📱 GCash</button>
+          <button type="button" class="pm-tab" data-method="card">💳 Card</button>
+        </div>
+
+        <!-- COD -->
+        <div class="pm-panel active" data-panel="cod">
+          <div class="cod-note">Pay in cash when your order arrives at your door — nothing to pay now. Our rider collects <strong class="cod-amount">₱2,500</strong> on delivery.</div>
+          <button type="button" class="pay-btn" id="codBtn">Place COD Order</button>
+          <div class="status" id="codStatus"></div>
+        </div>
+
+        <!-- GCash -->
+        <div class="pm-panel" data-panel="gcash">
+          <div class="gcash-box">
+            <div class="gcash-qr">SCAN TO PAY<br/>QR HERE</div>
+            <div>
+              <div class="gcash-acct-name">I2M2 Trading</div>
+              <div class="gcash-number">0917 XXX XXXX</div>
+              <div class="gcash-amount">Send exactly <strong class="gcash-amt">₱2,500</strong></div>
+            </div>
+          </div>
+          <ol class="steps-mini">
+            <li>Open GCash → Scan the QR above (or send to the number above).</li>
+            <li>Send the exact amount. GCash shows a confirmation with a <strong>Reference No.</strong></li>
+            <li>Paste that Reference No. below — this is how we confirm your payment and start processing.</li>
+          </ol>
+          <div class="field"><label for="gRef">GCash Reference Number</label><input id="gRef" placeholder="e.g. 1234 567 890123"/></div>
+          <button type="button" class="pay-btn" id="gcashBtn">I've Paid — Submit Order</button>
+          <div class="status" id="gcashStatus"></div>
+          <div class="secure-note">We verify against our GCash account and message you once confirmed — usually within a few hours.</div>
+        </div>
+
+        <!-- Card -->
+        <div class="pm-panel" data-panel="card">
+          <div class="field"><label for="cNum">Card Number</label><input id="cNum" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456"/></div>
+          <div class="field-row3">
+            <div class="field"><label for="cMon">MM</label><input id="cMon" inputmode="numeric" maxlength="2" placeholder="MM"/></div>
+            <div class="field"><label for="cYr">YYYY</label><input id="cYr" inputmode="numeric" maxlength="4" placeholder="YYYY"/></div>
+            <div class="field"><label for="cCvc">CVC</label><input id="cCvc" inputmode="numeric" maxlength="4" placeholder="123"/></div>
+          </div>
+          <button type="button" class="pay-btn" id="cardBtn">Pay <span class="card-amt">₱2,500</span> Now</button>
+          <div class="status" id="cardStatus"></div>
+          <iframe class="cc-3ds" id="cc3ds" title="Card verification"></iframe>
+          <div class="secure-note">🔒 Card details go straight to PayMongo — never stored or seen by us.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="position:sticky;top:78px;">
+        <div class="card-label">Order Summary</div>
+        <div class="summary-line"><span id="sumItem">Salvicare Capsule × 2 Bottles</span><span id="sumPrice">₱2,500</span></div>
+        <div class="summary-line"><span>Shipping</span><span id="sumShip" style="color:var(--gold);font-weight:700;">FREE</span></div>
+        <div class="summary-total"><span>Total</span><span id="sumTotal">₱2,500</span></div>
+        <div class="trust-mini">
+          <div><span>✓</span>FDA Registered PH FR-4000010419296</div>
+          <div><span>✓</span>60-day unopened-bottle guarantee</div>
+          <div><span>✓</span>Nationwide delivery via J&amp;T / LBC</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="natc-bar">
+  <div class="wrap">
+    <strong>⚠️ NO APPROVED THERAPEUTIC CLAIMS.</strong> Salvicare is a food supplement (FR-4000010419296), not intended to diagnose, treat, cure, or prevent any disease.<br/>
+    <strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">I2M2 Trading · Unit 310 Medecor Bldg., 222 Ortigas Avenue, Brgy. Greenhills, San Juan, Metro Manila<br/>&copy; 2026 I2M2 Trading. All rights reserved.</div>
+</footer>
+
+<script>
+(function(){
+  // ============================ SETUP ============================
+  // All three point at the same n8n instance, different webhook paths.
+  // Replace YOUR-N8N-HOST with the production n8n host once the bridge is imported.
+  var COD_ENDPOINT   = "https://YOUR-N8N-HOST/webhook/cod-order";        // n8n node "Receive COD Order From Site"
+  var GCASH_ENDPOINT = "https://YOUR-N8N-HOST/webhook/gcash-claim";      // n8n node "Receive GCash Claim From Site"
+  var CARD_ENDPOINT  = "https://YOUR-N8N-HOST/webhook/card-checkout-intent"; // n8n node "Receive Card Order From Site"
+  var SITE_TOKEN = "REPLACE_WITH_SITE_TOKEN";       // n8n 'Card Checkout Webhook Secret' (header X-Site-Token) — shared by all 3
+  var PAYMONGO_PUBLIC_KEY = "pk_test_REPLACE";      // PayMongo PUBLIC key — safe client-side, NOT the secret key
+  // ==============================================================
+
+  var BUNDLES = {
+    "capsule-1": { label: "Salvicare Capsule × 1 Bottle", amount: 1322, shipFree: false },
+    "capsule-2": { label: "Salvicare Capsule × 2 Bottles", amount: 2500, shipFree: true },
+    "capsule-3": { label: "Salvicare Capsule × 3 Bottles", amount: 3600, shipFree: true }
+  };
+
+  var currentKey = "capsule-2";
+  var currentMethod = "cod";
+  var frame = document.getElementById("cc3ds");
+  var pollTimer = null;
+
+  function peso(n){ return "₱" + n.toLocaleString("en-PH"); }
+  function b64(s){ return btoa(s); }
+  function pmAuth(){ return "Basic " + b64(PAYMONGO_PUBLIC_KEY + ":"); }
+
+  function newOrderRef(){ return "web-" + Date.now() + "-" + Math.random().toString(36).slice(2,8); }
+
+  function setStatus(id, msg, kind){
+    var el = document.getElementById(id);
+    el.textContent = msg || "";
+    el.className = "status" + (kind ? " " + kind : "");
+  }
+
+  function refreshSummary(){
+    var b = BUNDLES[currentKey];
+    document.getElementById("sumItem").textContent = b.label;
+    document.getElementById("sumPrice").textContent = peso(b.amount);
+    document.getElementById("sumTotal").textContent = peso(b.amount);
+    document.getElementById("sumShip").textContent = b.shipFree ? "FREE" : "Standard";
+    document.querySelectorAll(".cod-amount,.gcash-amt,.card-amt").forEach(function(n){ n.textContent = peso(b.amount); });
+  }
+
+  // ---- Step 1: bundle selection (preselect from ?bundle=1|2|3) ----
+  function selectBundle(key){
+    currentKey = key;
+    document.querySelectorAll(".bundle-opt").forEach(function(opt){
+      var on = opt.dataset.key === key;
+      opt.classList.toggle("selected", on);
+      opt.querySelector("input").checked = on;
+    });
+    refreshSummary();
+  }
+  document.querySelectorAll(".bundle-opt").forEach(function(opt){
+    opt.addEventListener("click", function(){ selectBundle(opt.dataset.key); });
+  });
+  var qp = new URLSearchParams(location.search).get("bundle");
+  var preKey = ({ "1":"capsule-1", "2":"capsule-2", "3":"capsule-3" })[qp] || "capsule-2";
+  selectBundle(preKey);
+
+  // ---- Step 3: payment method tabs ----
+  document.querySelectorAll(".pm-tab").forEach(function(tab){
+    tab.addEventListener("click", function(){
+      currentMethod = tab.dataset.method;
+      document.querySelectorAll(".pm-tab").forEach(function(t){ t.classList.remove("active"); });
+      document.querySelectorAll(".pm-panel").forEach(function(p){ p.classList.remove("active"); });
+      tab.classList.add("active");
+      document.querySelector('.pm-panel[data-panel="' + currentMethod + '"]').classList.add("active");
+    });
+  });
+
+  // ---- Shared: gather + validate customer details ----
+  function gatherDetails(){
+    var name = document.getElementById("fName").value.trim();
+    var email = document.getElementById("fEmail").value.trim();
+    var phone = document.getElementById("fPhone").value.trim();
+    var address = document.getElementById("fAddr").value.trim();
+    if (!name) return { error: "Please enter your full name." };
+    if (!email && !phone) return { error: "Please enter an email or phone number." };
+    return { name: name, email: email, phone: phone, address: address };
+  }
+
+  // ---- COD ----
+  document.getElementById("codBtn").addEventListener("click", function(){
+    var d = gatherDetails();
+    if (d.error) { setStatus("codStatus", d.error, "error"); return; }
+    if (!d.address) { setStatus("codStatus", "Please enter a delivery address for COD.", "error"); return; }
+    var btn = this; btn.disabled = true;
+    setStatus("codStatus", "Placing your order…", "loading");
+    fetch(COD_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
+      body: JSON.stringify({
+        method: "cod", productKey: currentKey, amountPHP: BUNDLES[currentKey].amount,
+        customerName: d.name, email: d.email, phone: d.phone, address: d.address, orderRef: newOrderRef()
+      })
+    }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
+      .then(function(){ location.href = "thank-you.html?method=cod"; })
+      .catch(function(){ setStatus("codStatus", "Could not place your order. Please try again or message us on Facebook.", "error"); btn.disabled = false; });
+  });
+
+  // ---- GCash (manual reference capture) ----
+  document.getElementById("gcashBtn").addEventListener("click", function(){
+    var d = gatherDetails();
+    if (d.error) { setStatus("gcashStatus", d.error, "error"); return; }
+    if (!d.address) { setStatus("gcashStatus", "Please enter a delivery address.", "error"); return; }
+    var ref = document.getElementById("gRef").value.trim();
+    if (!ref) { setStatus("gcashStatus", "Please paste your GCash Reference Number.", "error"); return; }
+    var btn = this; btn.disabled = true;
+    setStatus("gcashStatus", "Submitting your payment…", "loading");
+    fetch(GCASH_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
+      body: JSON.stringify({
+        method: "gcash", productKey: currentKey, amountPHP: BUNDLES[currentKey].amount,
+        customerName: d.name, email: d.email, phone: d.phone, address: d.address,
+        gcashReference: ref, orderRef: newOrderRef()
+      })
+    }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
+      .then(function(){ location.href = "thank-you.html?method=gcash"; })
+      .catch(function(){ setStatus("gcashStatus", "Could not submit. Please try again or message us on Facebook.", "error"); btn.disabled = false; });
+  });
+
+  // ---- Card (browser -> PayMongo directly; n8n only prices + starts the intent) ----
+  function showCardSuccess(){
+    frame.style.display = "none";
+    setStatus("cardStatus", "✓ Payment received! Redirecting…", "success");
+    setTimeout(function(){ location.href = "thank-you.html?method=card"; }, 1200);
+  }
+  function pollIntent(intentId, clientKey){
+    clearInterval(pollTimer);
+    var tries = 0;
+    pollTimer = setInterval(function(){
+      if (++tries > 40) { clearInterval(pollTimer); setStatus("cardStatus", "Taking longer than expected — check your email or message us to confirm.", "error"); return; }
+      fetch("https://api.paymongo.com/v1/payment_intents/" + intentId + "?client_key=" + encodeURIComponent(clientKey), { headers: { Authorization: pmAuth() } })
+        .then(function(r){ return r.json(); }).then(function(j){
+          var s = j.data && j.data.attributes && j.data.attributes.status;
+          if (s === "succeeded") { clearInterval(pollTimer); showCardSuccess(); }
+          else if (s === "awaiting_payment_method") { clearInterval(pollTimer); frame.style.display = "none"; setStatus("cardStatus", "Payment failed or was cancelled. Please try again.", "error"); document.getElementById("cardBtn").disabled = false; }
+        }).catch(function(){ /* transient — keep polling */ });
+    }, 3000);
+  }
+  function handleIntent(data, intentId, clientKey){
+    var s = data.attributes.status, na = data.attributes.next_action;
+    if (s === "succeeded") { showCardSuccess(); }
+    else if (na && na.type === "redirect" && na.redirect && na.redirect.url) {
+      setStatus("cardStatus", "Complete verification below…", "loading");
+      frame.src = na.redirect.url; frame.style.display = "block"; pollIntent(intentId, clientKey);
+    } else if (s === "awaiting_next_action" || s === "processing") { setStatus("cardStatus", "Confirming payment…", "loading"); pollIntent(intentId, clientKey); }
+    else { setStatus("cardStatus", "Payment could not be completed. Please try again or use COD/GCash.", "error"); document.getElementById("cardBtn").disabled = false; }
+  }
+  document.getElementById("cardBtn").addEventListener("click", function(){
+    var d = gatherDetails();
+    if (d.error) { setStatus("cardStatus", d.error, "error"); return; }
+    var num = document.getElementById("cNum").value.replace(/\s+/g, "");
+    var mon = parseInt(document.getElementById("cMon").value, 10);
+    var yr = parseInt(document.getElementById("cYr").value, 10);
+    var cvc = document.getElementById("cCvc").value.trim();
+    if (!num || !mon || !yr || !cvc) { setStatus("cardStatus", "Please complete all card fields.", "error"); return; }
+    var btn = this; btn.disabled = true;
+    setStatus("cardStatus", "Processing…", "loading");
+    var orderRef = newOrderRef();
+
+    fetch(CARD_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
+      body: JSON.stringify({ method: "card", productKey: currentKey, customerName: d.name, email: d.email, phone: d.phone, address: d.address, orderRef: orderRef })
+    }).then(function(r){ if(!r.ok) throw new Error("Could not start checkout. Please try again."); return r.json(); })
+      .then(function(intent){
+        // Card details go straight to PayMongo from here — never to our backend.
+        return fetch("https://api.paymongo.com/v1/payment_methods", {
+          method: "POST", headers: { "Content-Type": "application/json", Authorization: pmAuth() },
+          body: JSON.stringify({ data: { attributes: { type: "card", details: { card_number: num, exp_month: mon, exp_year: yr, cvc: cvc }, billing: { name: d.name, email: d.email, phone: d.phone } } } })
+        }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+          .then(function(pm){
+            if (!pm.ok || !pm.body.data) throw new Error((pm.body.errors && pm.body.errors[0] && pm.body.errors[0].detail) || "Card was declined.");
+            return fetch("https://api.paymongo.com/v1/payment_intents/" + intent.paymentIntentId + "/attach?client_key=" + encodeURIComponent(intent.clientKey), {
+              method: "POST", headers: { "Content-Type": "application/json", Authorization: pmAuth() },
+              body: JSON.stringify({ data: { attributes: { payment_method: pm.body.data.id, client_key: intent.clientKey, return_url: location.href } } })
+            }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+              .then(function(att){
+                if (!att.ok || !att.body.data) throw new Error((att.body.errors && att.body.errors[0] && att.body.errors[0].detail) || "Payment could not be completed.");
+                handleIntent(att.body.data, intent.paymentIntentId, intent.clientKey);
+              });
+          });
+      })
+      .catch(function(err){ setStatus("cardStatus", err.message || "Something went wrong. Please try again.", "error"); btn.disabled = false; });
+  });
+})();
+</script>
+
+</body>
+</html>
