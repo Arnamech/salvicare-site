@@ -674,9 +674,11 @@
 
 <script>
 (function(){
-  // SETUP: replace with the real n8n webhook URL (see node "Receive Card Order From Site").
-  var CARD_ENDPOINT = "https://YOUR-N8N-DOMAIN/webhook/card-checkout-intent";
-  // SETUP: same value as the 'Card Checkout Webhook Secret' credential's X-Site-Token header.
+  // SETUP: replace with the n8n instance's production webhook URL for the card flow
+  // (looks like https://<your-n8n-host>/webhook/card-checkout-intent -- from the
+  // "Receive Card Order From Site" node after importing n8n-paymongo-ghl-payment-bridge.json).
+  var CARD_ENDPOINT = "https://YOUR-N8N-HOST/webhook/card-checkout-intent";
+  // SETUP: same value as the n8n 'Card Checkout Webhook Secret' credential (header X-Site-Token).
   var SITE_TOKEN = "REPLACE_WITH_SITE_TOKEN";
   // SETUP: PayMongo PUBLIC key (pk_live_... / pk_test_...) — safe to expose client-side, this is NOT the secret key.
   var PAYMONGO_PUBLIC_KEY = "pk_test_REPLACE";
