@@ -292,10 +292,12 @@
   // ============================ SETUP ============================
   // All three point at the same n8n instance, different webhook paths.
   // Replace YOUR-N8N-HOST with the production n8n host once the bridge is imported.
-  var COD_ENDPOINT   = "https://YOUR-N8N-HOST/webhook/cod-order";        // n8n node "Receive COD Order From Site"
-  var GCASH_ENDPOINT = "https://YOUR-N8N-HOST/webhook/gcash-claim";      // n8n node "Receive GCash Claim From Site"
-  var CARD_ENDPOINT  = "https://YOUR-N8N-HOST/webhook/card-checkout-intent"; // n8n node "Receive Card Order From Site"
-  var SITE_TOKEN = "REPLACE_WITH_SITE_TOKEN";       // n8n 'Card Checkout Webhook Secret' (header X-Site-Token) — shared by all 3
+  var COD_ENDPOINT   = "https://n8n.cvinson.cloud/webhook/cod-order";        // n8n node "Receive COD Order From Site"
+  var GCASH_ENDPOINT = "https://n8n.cvinson.cloud/webhook/gcash-claim";      // n8n node "Receive GCash Claim From Site"
+  var CARD_ENDPOINT  = "https://n8n.cvinson.cloud/webhook/card-checkout-intent"; // n8n node "Receive Card Order From Site"
+  // Must match the value entered as the "Card Checkout Webhook Secret" Header Auth
+  // credential in n8n (header X-Site-Token) — attached to all 3 webhook nodes above.
+  var SITE_TOKEN = "378b37dcff406b88264b573ac81f950d79fa6de52c83c74e";
   var PAYMONGO_PUBLIC_KEY = "pk_test_REPLACE";      // PayMongo PUBLIC key — safe client-side, NOT the secret key
   // ==============================================================
 
