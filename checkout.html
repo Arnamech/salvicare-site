@@ -54,8 +54,9 @@
   .field{margin-bottom:14px;}
   .field:last-child{margin-bottom:0;}
   .field label{display:block;font-size:.72rem;font-weight:700;margin-bottom:5px;}
-  .field input{width:100%;padding:11px 13px;border:1px solid var(--line);font-size:.88rem;font-family:'Open Sans',sans-serif;background:var(--paper);}
-  .field input:focus{outline:2px solid var(--red);outline-offset:1px;}
+  .field input,.field select{width:100%;padding:11px 13px;border:1px solid var(--line);font-size:.88rem;font-family:'Open Sans',sans-serif;background:var(--paper);}
+  .field input:focus,.field select:focus{outline:2px solid var(--red);outline-offset:1px;}
+  .field input:disabled{color:var(--gray);background:var(--line);}
   @media(max-width:480px){.field-row{grid-template-columns:1fr;}}
 
   .pm-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
@@ -142,7 +143,68 @@
           <div class="field"><label for="fEmail">Email</label><input id="fEmail" type="email" autocomplete="email" placeholder="juan@email.com"/></div>
           <div class="field"><label for="fPhone">Phone</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="09xx xxx xxxx"/></div>
         </div>
-        <div class="field"><label for="fAddr">Delivery Address</label><input id="fAddr" autocomplete="street-address" placeholder="House/Unit, Street, Barangay, City, Province"/></div>
+        <div class="field"><label for="fAddr">Delivery Address</label><input id="fAddr" autocomplete="street-address" placeholder="House/Unit, Street, Barangay, City"/></div>
+        <div class="field-row">
+          <div class="field">
+            <label for="fProvince">Province</label>
+            <select id="fProvince" autocomplete="address-level1">
+              <option value="">Select province…</option>
+              <optgroup label="Metro Manila">
+                <option>Metro Manila (NCR)</option>
+              </optgroup>
+              <optgroup label="Ilocos Region">
+                <option>Ilocos Norte</option><option>Ilocos Sur</option><option>La Union</option><option>Pangasinan</option>
+              </optgroup>
+              <optgroup label="Cagayan Valley">
+                <option>Batanes</option><option>Cagayan</option><option>Isabela</option><option>Nueva Vizcaya</option><option>Quirino</option>
+              </optgroup>
+              <optgroup label="Central Luzon">
+                <option>Aurora</option><option>Bataan</option><option>Bulacan</option><option>Nueva Ecija</option><option>Pampanga</option><option>Tarlac</option><option>Zambales</option>
+              </optgroup>
+              <optgroup label="CALABARZON">
+                <option>Batangas</option><option>Cavite</option><option>Laguna</option><option>Quezon</option><option>Rizal</option>
+              </optgroup>
+              <optgroup label="MIMAROPA">
+                <option>Marinduque</option><option>Occidental Mindoro</option><option>Oriental Mindoro</option><option>Palawan</option><option>Romblon</option>
+              </optgroup>
+              <optgroup label="Bicol Region">
+                <option>Albay</option><option>Camarines Norte</option><option>Camarines Sur</option><option>Catanduanes</option><option>Masbate</option><option>Sorsogon</option>
+              </optgroup>
+              <optgroup label="Western Visayas">
+                <option>Aklan</option><option>Antique</option><option>Capiz</option><option>Guimaras</option><option>Iloilo</option><option>Negros Occidental</option>
+              </optgroup>
+              <optgroup label="Central Visayas">
+                <option>Bohol</option><option>Cebu</option><option>Negros Oriental</option><option>Siquijor</option>
+              </optgroup>
+              <optgroup label="Eastern Visayas">
+                <option>Biliran</option><option>Eastern Samar</option><option>Leyte</option><option>Northern Samar</option><option>Samar</option><option>Southern Leyte</option>
+              </optgroup>
+              <optgroup label="Zamboanga Peninsula">
+                <option>Zamboanga del Norte</option><option>Zamboanga del Sur</option><option>Zamboanga Sibugay</option>
+              </optgroup>
+              <optgroup label="Northern Mindanao">
+                <option>Bukidnon</option><option>Camiguin</option><option>Lanao del Norte</option><option>Misamis Occidental</option><option>Misamis Oriental</option>
+              </optgroup>
+              <optgroup label="Davao Region">
+                <option>Davao de Oro</option><option>Davao del Norte</option><option>Davao del Sur</option><option>Davao Occidental</option><option>Davao Oriental</option>
+              </optgroup>
+              <optgroup label="SOCCSKSARGEN">
+                <option>Cotabato</option><option>Sarangani</option><option>South Cotabato</option><option>Sultan Kudarat</option>
+              </optgroup>
+              <optgroup label="Caraga">
+                <option>Agusan del Norte</option><option>Agusan del Sur</option><option>Dinagat Islands</option><option>Surigao del Norte</option><option>Surigao del Sur</option>
+              </optgroup>
+              <optgroup label="Cordillera (CAR)">
+                <option>Abra</option><option>Apayao</option><option>Benguet</option><option>Ifugao</option><option>Kalinga</option><option>Mountain Province</option>
+              </optgroup>
+              <optgroup label="Bangsamoro (BARMM)">
+                <option>Basilan</option><option>Lanao del Sur</option><option>Maguindanao del Norte</option><option>Maguindanao del Sur</option><option>Sulu</option><option>Tawi-Tawi</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="field"><label for="fCountry">Country</label><input id="fCountry" value="Philippines" disabled/></div>
+        </div>
+        <p style="font-size:.72rem;color:var(--gray);margin-top:-6px;">We currently deliver nationwide within the Philippines only.</p>
       </div>
 
       <div class="card">
@@ -306,21 +368,26 @@
   });
 
   // ---- Shared: gather + validate customer details ----
+  // Every order ships physically within the Philippines only — address + province
+  // are required for all three payment methods, and country is always "Philippines"
+  // (locked, not user-editable) rather than trusting free-text input for that.
   function gatherDetails(){
     var name = document.getElementById("fName").value.trim();
     var email = document.getElementById("fEmail").value.trim();
     var phone = document.getElementById("fPhone").value.trim();
     var address = document.getElementById("fAddr").value.trim();
+    var province = document.getElementById("fProvince").value;
     if (!name) return { error: "Please enter your full name." };
     if (!email && !phone) return { error: "Please enter an email or phone number." };
-    return { name: name, email: email, phone: phone, address: address };
+    if (!address) return { error: "Please enter your delivery address." };
+    if (!province) return { error: "Please select your province — we currently deliver within the Philippines only." };
+    return { name: name, email: email, phone: phone, address: address, province: province, country: "Philippines" };
   }
 
   // ---- COD ----
   document.getElementById("codBtn").addEventListener("click", function(){
     var d = gatherDetails();
     if (d.error) { setStatus("codStatus", d.error, "error"); return; }
-    if (!d.address) { setStatus("codStatus", "Please enter a delivery address for COD.", "error"); return; }
     var btn = this; btn.disabled = true;
     setStatus("codStatus", "Placing your order…", "loading");
     var orderRef = newOrderRef();
@@ -329,7 +396,8 @@
       headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
       body: JSON.stringify({
         method: "cod", productKey: currentKey, amountPHP: BUNDLES[currentKey].amount,
-        customerName: d.name, email: d.email, phone: d.phone, address: d.address, orderRef: orderRef
+        customerName: d.name, email: d.email, phone: d.phone, address: d.address,
+        province: d.province, country: d.country, orderRef: orderRef
       })
     }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
       .then(function(){ location.href = thankYouUrl("cod", orderRef); })
@@ -340,7 +408,6 @@
   document.getElementById("gcashBtn").addEventListener("click", function(){
     var d = gatherDetails();
     if (d.error) { setStatus("gcashStatus", d.error, "error"); return; }
-    if (!d.address) { setStatus("gcashStatus", "Please enter a delivery address.", "error"); return; }
     var ref = document.getElementById("gRef").value.trim();
     if (!ref) { setStatus("gcashStatus", "Please paste your GCash Reference Number.", "error"); return; }
     var btn = this; btn.disabled = true;
@@ -352,6 +419,7 @@
       body: JSON.stringify({
         method: "gcash", productKey: currentKey, amountPHP: BUNDLES[currentKey].amount,
         customerName: d.name, email: d.email, phone: d.phone, address: d.address,
+        province: d.province, country: d.country,
         gcashReference: ref, orderRef: orderRef
       })
     }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
@@ -403,7 +471,7 @@
     fetch(CARD_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
-      body: JSON.stringify({ method: "card", productKey: currentKey, customerName: d.name, email: d.email, phone: d.phone, address: d.address, orderRef: orderRef })
+      body: JSON.stringify({ method: "card", productKey: currentKey, customerName: d.name, email: d.email, phone: d.phone, address: d.address, province: d.province, country: d.country, orderRef: orderRef })
     }).then(function(r){ if(!r.ok) throw new Error("Could not start checkout. Please try again."); return r.json(); })
       .then(function(intent){
         // Card details go straight to PayMongo from here — never to our backend.
