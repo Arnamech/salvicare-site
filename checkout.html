@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Checkout — Salvicare Capsule</title>
-<meta name="description" content="Complete your Salvicare Capsule order. Cash on Delivery, GCash, or card. FDA Registered PH FR-4000010419296."/>
+<meta name="description" content="Complete your Salvicare Capsule order. Cash on Delivery or GCash. FDA Registered PH FR-4000010419296."/>
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"/>
 <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -59,7 +59,7 @@
   .field input:disabled{color:var(--gray);background:var(--line);}
   @media(max-width:480px){.field-row{grid-template-columns:1fr;}}
 
-  .pm-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+  .pm-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px;}
   .pm-tab{text-align:center;padding:12px 8px;border:1.5px solid var(--line);font-size:.76rem;font-weight:800;cursor:pointer;color:var(--gray);background:none;font-family:'Montserrat',sans-serif;}
   .pm-tab.active{border-color:var(--red);color:var(--red);background:rgba(180,0,0,.04);}
   .pm-panel{display:none;}
@@ -86,7 +86,6 @@
   .status.error{color:#B00020;}
   .status.success{color:#1A7A3D;}
   .secure-note{font-size:.68rem;color:var(--gray);text-align:center;margin-top:10px;}
-  .cc-3ds{display:none;width:100%;height:420px;border:1px solid var(--line);margin-top:12px;}
 
   .summary-line{display:flex;justify-content:space-between;font-size:.86rem;padding:8px 0;border-bottom:1px solid var(--line);}
   .summary-total{display:flex;justify-content:space-between;font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.3rem;color:var(--red);padding-top:14px;margin-top:6px;border-top:2px solid var(--ink);}
@@ -212,7 +211,6 @@
         <div class="pm-tabs">
           <button type="button" class="pm-tab active" data-method="cod">💵 COD</button>
           <button type="button" class="pm-tab" data-method="gcash">📱 GCash</button>
-          <button type="button" class="pm-tab" data-method="card">💳 Card</button>
         </div>
 
         <!-- COD -->
@@ -241,20 +239,6 @@
           <button type="button" class="pay-btn" id="gcashBtn">I've Paid — Submit Order</button>
           <div class="status" id="gcashStatus"></div>
           <div class="secure-note">We verify against our GCash account and message you once confirmed — usually within a few hours.</div>
-        </div>
-
-        <!-- Card -->
-        <div class="pm-panel" data-panel="card">
-          <div class="field"><label for="cNum">Card Number</label><input id="cNum" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456"/></div>
-          <div class="field-row3">
-            <div class="field"><label for="cMon">MM</label><input id="cMon" inputmode="numeric" maxlength="2" placeholder="MM"/></div>
-            <div class="field"><label for="cYr">YYYY</label><input id="cYr" inputmode="numeric" maxlength="4" placeholder="YYYY"/></div>
-            <div class="field"><label for="cCvc">CVC</label><input id="cCvc" inputmode="numeric" maxlength="4" placeholder="123"/></div>
-          </div>
-          <button type="button" class="pay-btn" id="cardBtn">Pay <span class="card-amt">₱2,500</span> Now</button>
-          <div class="status" id="cardStatus"></div>
-          <iframe class="cc-3ds" id="cc3ds" title="Card verification"></iframe>
-          <div class="secure-note">🔒 Card details go straight to PayMongo — never stored or seen by us.</div>
         </div>
       </div>
     </div>
@@ -290,15 +274,11 @@
 <script>
 (function(){
   // ============================ SETUP ============================
-  // All three point at the same n8n instance, different webhook paths.
-  // Replace YOUR-N8N-HOST with the production n8n host once the bridge is imported.
+  // Both point at the same n8n instance, different webhook paths.
   var COD_ENDPOINT   = "https://n8n.cvinson.cloud/webhook/cod-order";        // n8n node "Receive COD Order From Site"
   var GCASH_ENDPOINT = "https://n8n.cvinson.cloud/webhook/gcash-claim";      // n8n node "Receive GCash Claim From Site"
-  var CARD_ENDPOINT  = "https://n8n.cvinson.cloud/webhook/card-checkout-intent"; // n8n node "Receive Card Order From Site"
-  // Must match the value entered as the "Card Checkout Webhook Secret" Header Auth
-  // credential in n8n (header X-Site-Token) — attached to all 3 webhook nodes above.
+  // Must match the value entered as the Header Auth credential in n8n (header X-Site-Token) — attached to both webhook nodes above.
   var SITE_TOKEN = "378b37dcff406b88264b573ac81f950d79fa6de52c83c74e";
-  var PAYMONGO_PUBLIC_KEY = "pk_test_REPLACE";      // PayMongo PUBLIC key — safe client-side, NOT the secret key
   // ==============================================================
 
   var BUNDLES = {
@@ -309,8 +289,6 @@
 
   var currentKey = "capsule-2";
   var currentMethod = "cod";
-  var frame = document.getElementById("cc3ds");
-  var pollTimer = null;
   var lastOrderRef = "";
 
   function thankYouUrl(method, orderRef, gRef){
@@ -321,8 +299,6 @@
   }
 
   function peso(n){ return "₱" + n.toLocaleString("en-PH"); }
-  function b64(s){ return btoa(s); }
-  function pmAuth(){ return "Basic " + b64(PAYMONGO_PUBLIC_KEY + ":"); }
 
   function newOrderRef(){ return "web-" + Date.now() + "-" + Math.random().toString(36).slice(2,8); }
 
@@ -338,7 +314,7 @@
     document.getElementById("sumPrice").textContent = peso(b.amount);
     document.getElementById("sumTotal").textContent = peso(b.amount);
     document.getElementById("sumShip").textContent = b.shipFree ? "FREE" : "Standard";
-    document.querySelectorAll(".cod-amount,.gcash-amt,.card-amt").forEach(function(n){ n.textContent = peso(b.amount); });
+    document.querySelectorAll(".cod-amount,.gcash-amt").forEach(function(n){ n.textContent = peso(b.amount); });
   }
 
   // ---- Step 1: bundle selection (preselect from ?bundle=1|2|3) ----
@@ -427,73 +403,6 @@
     }).then(function(r){ if(!r.ok) throw new Error(); return r.json(); })
       .then(function(){ location.href = thankYouUrl("gcash", orderRef, ref); })
       .catch(function(){ setStatus("gcashStatus", "Could not submit. Please try again or message us on Facebook.", "error"); btn.disabled = false; });
-  });
-
-  // ---- Card (browser -> PayMongo directly; n8n only prices + starts the intent) ----
-  function showCardSuccess(){
-    frame.style.display = "none";
-    setStatus("cardStatus", "✓ Payment received! Redirecting…", "success");
-    setTimeout(function(){ location.href = thankYouUrl("card", lastOrderRef); }, 1200);
-  }
-  function pollIntent(intentId, clientKey){
-    clearInterval(pollTimer);
-    var tries = 0;
-    pollTimer = setInterval(function(){
-      if (++tries > 40) { clearInterval(pollTimer); setStatus("cardStatus", "Taking longer than expected — check your email or message us to confirm.", "error"); return; }
-      fetch("https://api.paymongo.com/v1/payment_intents/" + intentId + "?client_key=" + encodeURIComponent(clientKey), { headers: { Authorization: pmAuth() } })
-        .then(function(r){ return r.json(); }).then(function(j){
-          var s = j.data && j.data.attributes && j.data.attributes.status;
-          if (s === "succeeded") { clearInterval(pollTimer); showCardSuccess(); }
-          else if (s === "awaiting_payment_method") { clearInterval(pollTimer); frame.style.display = "none"; setStatus("cardStatus", "Payment failed or was cancelled. Please try again.", "error"); document.getElementById("cardBtn").disabled = false; }
-        }).catch(function(){ /* transient — keep polling */ });
-    }, 3000);
-  }
-  function handleIntent(data, intentId, clientKey){
-    var s = data.attributes.status, na = data.attributes.next_action;
-    if (s === "succeeded") { showCardSuccess(); }
-    else if (na && na.type === "redirect" && na.redirect && na.redirect.url) {
-      setStatus("cardStatus", "Complete verification below…", "loading");
-      frame.src = na.redirect.url; frame.style.display = "block"; pollIntent(intentId, clientKey);
-    } else if (s === "awaiting_next_action" || s === "processing") { setStatus("cardStatus", "Confirming payment…", "loading"); pollIntent(intentId, clientKey); }
-    else { setStatus("cardStatus", "Payment could not be completed. Please try again or use COD/GCash.", "error"); document.getElementById("cardBtn").disabled = false; }
-  }
-  document.getElementById("cardBtn").addEventListener("click", function(){
-    var d = gatherDetails();
-    if (d.error) { setStatus("cardStatus", d.error, "error"); return; }
-    var num = document.getElementById("cNum").value.replace(/\s+/g, "");
-    var mon = parseInt(document.getElementById("cMon").value, 10);
-    var yr = parseInt(document.getElementById("cYr").value, 10);
-    var cvc = document.getElementById("cCvc").value.trim();
-    if (!num || !mon || !yr || !cvc) { setStatus("cardStatus", "Please complete all card fields.", "error"); return; }
-    var btn = this; btn.disabled = true;
-    setStatus("cardStatus", "Processing…", "loading");
-    var orderRef = newOrderRef();
-    lastOrderRef = orderRef;
-
-    fetch(CARD_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Site-Token": SITE_TOKEN },
-      body: JSON.stringify({ method: "card", productKey: currentKey, customerName: d.name, email: d.email, phone: d.phone, address: d.address, province: d.province, country: d.country, orderRef: orderRef })
-    }).then(function(r){ if(!r.ok) throw new Error("Could not start checkout. Please try again."); return r.json(); })
-      .then(function(intent){
-        // Card details go straight to PayMongo from here — never to our backend.
-        return fetch("https://api.paymongo.com/v1/payment_methods", {
-          method: "POST", headers: { "Content-Type": "application/json", Authorization: pmAuth() },
-          body: JSON.stringify({ data: { attributes: { type: "card", details: { card_number: num, exp_month: mon, exp_year: yr, cvc: cvc }, billing: { name: d.name, email: d.email, phone: d.phone } } } })
-        }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
-          .then(function(pm){
-            if (!pm.ok || !pm.body.data) throw new Error((pm.body.errors && pm.body.errors[0] && pm.body.errors[0].detail) || "Card was declined.");
-            return fetch("https://api.paymongo.com/v1/payment_intents/" + intent.paymentIntentId + "/attach?client_key=" + encodeURIComponent(intent.clientKey), {
-              method: "POST", headers: { "Content-Type": "application/json", Authorization: pmAuth() },
-              body: JSON.stringify({ data: { attributes: { payment_method: pm.body.data.id, client_key: intent.clientKey, return_url: location.href } } })
-            }).then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
-              .then(function(att){
-                if (!att.ok || !att.body.data) throw new Error((att.body.errors && att.body.errors[0] && att.body.errors[0].detail) || "Payment could not be completed.");
-                handleIntent(att.body.data, intent.paymentIntentId, intent.clientKey);
-              });
-          });
-      })
-      .catch(function(err){ setStatus("cardStatus", err.message || "Something went wrong. Please try again.", "error"); btn.disabled = false; });
   });
 })();
 </script>
