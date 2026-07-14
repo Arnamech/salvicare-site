@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /thank-you.html
+
+Sitemap: https://salvicare.i2m2trading.com/sitemap.xml
