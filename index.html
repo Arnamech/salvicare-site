@@ -30,6 +30,8 @@
   .topline{background:var(--red);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;letter-spacing:.3px;padding:9px 0;}
   .topline .wrap{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;}
   .topline em{color:var(--gold);font-style:normal;font-weight:800;}
+  .topline a{color:inherit;text-decoration:underline;text-underline-offset:2px;}
+  .topline a:hover{color:var(--gold);}
 
   /* ── NAV ── */
   nav{background:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:99;}
@@ -268,11 +270,18 @@
   .f-contact a{display:flex;align-items:center;gap:8px;font-size:.8rem;color:rgba(255,255,255,.85);}
   .f-contact a:hover{color:var(--gold);}
   .f-contact svg{flex-shrink:0;opacity:.85;}
-  #contact-details:target{animation:contactPulse 1.8s ease-out;border-radius:4px;}
-  @keyframes contactPulse{0%{box-shadow:0 0 0 6px rgba(255,255,255,.4);background:rgba(255,255,255,.08);}100%{box-shadow:0 0 0 0 rgba(255,255,255,0);background:rgba(255,255,255,0);}}
-  @media (prefers-reduced-motion: reduce){#contact-details:target{animation:none;background:rgba(255,255,255,.08);}}
   .f-col h4{font-size:.72rem;font-weight:800;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;}
   .f-col a{display:block;font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:9px;}
+  .f-popover{position:relative;}
+  .f-popover-trigger{all:unset;cursor:pointer;display:flex;align-items:center;gap:5px;font-size:.8rem;color:rgba(255,255,255,.65);margin-bottom:9px;}
+  .f-popover-trigger:hover{color:var(--gold);}
+  .f-popover-trigger .caret{width:9px;height:9px;transition:transform .2s ease;flex-shrink:0;}
+  .f-popover-trigger[aria-expanded="true"] .caret{transform:rotate(180deg);}
+  .f-popover-menu{position:absolute;bottom:calc(100% + 10px);left:0;background:#fff;min-width:230px;border-radius:8px;box-shadow:0 12px 28px rgba(0,0,0,.3);padding:8px;z-index:20;}
+  .f-popover-menu[hidden]{display:none;}
+  .f-popover-menu a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;font-size:.82rem;color:var(--ink);font-weight:600;margin-bottom:0;}
+  .f-popover-menu a:hover{background:#F3F3F3;}
+  .f-popover-menu svg{flex-shrink:0;color:var(--red);}
   .footer-bottom{border-top:1px solid rgba(255,255,255,.15);padding:24px 0;font-size:.7rem;color:rgba(255,255,255,.5);line-height:1.9;}
   @media(max-width:760px){.footer-grid{grid-template-columns:1fr;gap:28px;}}
 
@@ -281,7 +290,7 @@
 </head>
 <body>
 
-<div class="topline"><div class="wrap">🌿 <em>Free Shipping</em> on 2+ bottles &nbsp;·&nbsp; COD Available Nationwide &nbsp;·&nbsp; FDA Registered PH <em>FR-4000010419296</em></div></div>
+<div class="topline"><div class="wrap">🌿 <em>Free Shipping</em> on 2+ bottles &nbsp;·&nbsp; COD Available Nationwide &nbsp;·&nbsp; FDA Registered PH <em>FR-4000010419296</em> &nbsp;·&nbsp; 📞 <a href="tel:+639174613251">0917 461 3251</a></div></div>
 
 <nav>
   <div class="wrap">
@@ -591,14 +600,25 @@
         <div class="f-logo"><img src="salvicare-logo.svg" alt="Salvicare"/></div>
         <div class="f-tagline">Natural Ingredients. Daily Support. Better Wellness.</div>
         <div class="f-company"><strong>I2M2 Trading</strong><br/>Unit 310 Medecor Bldg.,<br/>222 Ortigas Avenue,<br/>Brgy. Greenhills, San Juan,<br/>Metro Manila</div>
-        <div class="f-contact" id="contact-details" tabindex="-1">
+        <div class="f-contact">
           <a href="tel:+6328655816"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>(02) 8655-6816</a>
           <a href="tel:+639174613251"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>0917 461 3251</a>
           <a href="mailto:products@i2m2trading.com"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>products@i2m2trading.com</a>
         </div>
       </div>
       <div class="f-col"><h4>Navigation</h4><a href="#why">Why Salvicare</a><a href="#ingredients">Ingredients</a><a href="#bundle">Pricing</a><a href="#faq">FAQ</a></div>
-      <div class="f-col"><h4>Order Now</h4><a href="#contact-details">Contact Us</a><a href="https://privacy-policy.i2m2trading.com">Privacy Policy</a><a href="https://terms-of-service.i2m2trading.com">Terms & Refunds</a></div>
+      <div class="f-col">
+        <h4>Order Now</h4>
+        <div class="f-popover">
+          <button type="button" class="f-popover-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="contact-popover" onclick="toggleContactPopover(this)">Contact Us<svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="f-popover-menu" id="contact-popover" role="menu" hidden>
+            <a href="tel:+6328655816" role="menuitem"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>Call (02) 8655-6816</a>
+            <a href="tel:+639174613251" role="menuitem"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>Text/Call 0917 461 3251</a>
+            <a href="mailto:products@i2m2trading.com" role="menuitem"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Email Us</a>
+          </div>
+        </div>
+        <a href="https://privacy-policy.i2m2trading.com">Privacy Policy</a><a href="https://terms-of-service.i2m2trading.com">Terms & Refunds</a>
+      </div>
     </div>
     <div class="footer-bottom">* Structure/function claims only. Salvicare is a food supplement (FDA PH FR-4000010419296). <strong>NO APPROVED THERAPEUTIC CLAIMS.</strong> Not intended to diagnose, treat, cure, or prevent any disease. Results may vary. Always consult your physician before use, especially if pregnant, lactating, diabetic, or on maintenance medication.<br/><strong>MAHALAGANG PAALALA: ANG SALVICARE AY HINDI GAMOT AT HINDI DAPAT GAMITING PANGGAMOT SA ANUMANG URI NG SAKIT.</strong> &copy; 2026 I2M2 Trading. All rights reserved.</div>
   </div>
@@ -607,6 +627,18 @@
 <script>
   function toggleNav(){document.getElementById('mobileNav').classList.toggle('open');}
   function closeNav(){document.getElementById('mobileNav').classList.remove('open');}
+  function closeAllContactPopovers(){
+    document.querySelectorAll('.f-popover-menu').forEach(m=>m.hidden=true);
+    document.querySelectorAll('.f-popover-trigger').forEach(b=>b.setAttribute('aria-expanded','false'));
+  }
+  function toggleContactPopover(btn){
+    const menu = document.getElementById(btn.getAttribute('aria-controls'));
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    closeAllContactPopovers();
+    if(!isOpen){ menu.hidden = false; btn.setAttribute('aria-expanded','true'); }
+  }
+  document.addEventListener('click', function(e){ if(!e.target.closest('.f-popover')) closeAllContactPopovers(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeAllContactPopovers(); });
   function toggleFaq(btn){
     const answer = btn.nextElementSibling;
     const isOpen = answer.classList.contains('open');
